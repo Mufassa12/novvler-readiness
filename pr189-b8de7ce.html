@@ -25,7 +25,7 @@ Self-built review. The earlier medium (recheck cost) is fixed and nothing medium
 <li>A refused recheck keeps no credit. With concurrent rechecks only one proceeds. A failed vision call refunds the credit.</li>
 <li>Refusals return 402 or 429 with <code>Retry-After</code>.</li>
 <li>Migration 037 adds a nullable <code>recheck_at</code> column and is safe.</li>
-<li>Low: the webhook URL from env config accepts any host (redirects off, 5s timeout).</li>
+<li>One low risk is tracked privately (not a blocker).</li>
 <li>Low: 036's <code>CHECK</code> takes a brief lock on small tables.</li>
 </ul></div>
 
