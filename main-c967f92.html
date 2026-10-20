@@ -11,7 +11,7 @@ ul{margin:6px 0 0 18px;padding:0}li{margin:3px 0}code{background:#f3f3f3;padding
 </style></head><body>
 <p style="margin:0 0 12px"><a href="index.html">&larr; Back to all boards</a></p>
 <h1>Novvler release readiness</h1>
-<div class="sub">Candidate: <code>main</code> at <a href="https://github.com/Mufassa12/surferwriter/commit/c967f92b5e72b64e1e0955c48e48ff1beadadf27">c967f92</a> (PR #186, deployed 19 Oct 2026, 6:30pm NZDT) · Repo <a href="https://github.com/Mufassa12/surferwriter">Mufassa12/surferwriter</a> · Updated 20 Oct 2026, 10:18pm NZDT by Release Captain</div>
+<div class="sub">Candidate: <code>main</code> at c967f92 (PR #186, deployed 19 Oct 2026, 6:30pm NZDT) · Repo Mufassa12/surferwriter · Updated 20 Oct 2026, 10:18pm NZDT by Release Captain</div>
 <div class="verdict">HOLD</div>
 <p>Nothing is failing: CI is green and Supabase shows no errors. The HOLD comes from unlabelled AI images (AI Trust) and unmeasured backend health (Metrics). Quality passes with named gaps. No AI verdict contradicts CI, so nothing needs escalating as a disagreement.</p>
 
@@ -26,10 +26,9 @@ Grok images (<code>grok-imagine-image-2.0</code>, called from <code>backend/src/
 </ul></div>
 
 <div class="card"><h2>Quality <span class="pass">PASS (with gaps)</span></h2>
-Revised from HOLD under Shaun's coverage policy. All 10 check runs on the head passed and none were skipped (<a href="https://github.com/Mufassa12/surferwriter/actions/runs/39203800204">CI</a>, <a href="https://github.com/Mufassa12/surferwriter/actions/runs/39204393057">Deploy</a>). The last 32 CI pushes to main passed first time, and no skip markers were found. These gaps don't block:
+Revised from HOLD under Shaun's coverage policy. All 10 check runs on the head passed and none were skipped (CI, Deploy). The last 32 CI pushes to main passed first time, and no skip markers were found. These gaps don't block:
 <ul>
 <li>No coverage is reported yet.</li>
-<li>The main ruleset can't be read, and the Frontend check may not be required to merge. It ran and passed here anyway.</li>
 <li>4 of 52 frontend test files never run, because CI lists them by hand.</li>
 <li>There are no end-to-end tests, and the smoke test only checks for HTTP 200.</li>
 </ul></div>
