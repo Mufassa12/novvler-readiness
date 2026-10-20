@@ -32,7 +32,7 @@ Self-built review. The earlier medium (recheck cost) is fixed and nothing medium
 <div class="card"><h2>Quality <span class="pass">PASS (with gaps)</span></h2>
 Every required check in <a href="https://github.com/Mufassa12/surferwriter/actions/runs/39472121020">CI run 39472121020</a> ran and passed.
 <ul>
-<li>Backend: clippy clean, <code>cargo test</code> 212 passed, 0 failed, 0 ignored (7:15 AM NZDT). Includes <code>recheck_past_the_allowance_does_not_call_the_vision_client</code>, <code>recheck_inside_the_cooldown_does_not_call_the_vision_client</code>, <code>recheck_after_the_cooldown_runs_when_allowance_remains</code>, <code>recheck_cooldown_sends_retry_after_and_the_allowance_is_payment_required</code>, the migration test and the not-AI mismatch test. No <code>XAI_API_KEY</code> in CI.</li>
+<li>Backend: clippy clean, <code>cargo test</code> 212 passed, 0 failed, 0 ignored (7:15 AM NZDT). Includes <code>recheck_past_the_allowance_does_not_call_the_vision_client</code>, <code>recheck_inside_the_cooldown_does_not_call_the_vision_client</code>, <code>recheck_after_the_cooldown_runs_when_allowance_remains</code>, <code>recheck_cooldown_sends_retry_after_and_the_allowance_is_payment_required</code>, the migration test and the not-AI mismatch test. No live API key in CI.</li>
 <li>Frontend: 430 node tests passed, 0 skipped. Website passed.</li>
 <li>Gaps (not blockers): no coverage reporting, no end-to-end tests, 4 frontend test files not run in CI.</li>
 </ul></div>
@@ -54,7 +54,7 @@ Metrics: PASS on the production baseline. Latency and error rates are healthy, w
 Imagine pencil sketch of a lighthouse: a single test call, not stored in Novvler.
 <ul>
 <li>Vision JSON: <code>ai_generated: false</code>, confidence 0.85.</li>
-<li>The "not AI" answer was flagged (<code>vision_mismatch</code>), not sent for review; the AI-generated label stays.</li>
+<li>In Novvler, a "not AI" answer on an Imagine image sets <code>vision_mismatch</code> (proven by the CI test) and the AI-generated label stays.</li>
 </ul></div>
 
 <div class="card"><h2>Decision needed from Shaun</h2>
