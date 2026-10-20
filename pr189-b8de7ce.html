@@ -1,0 +1,64 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Novvler readiness · PR #189 · b8de7ce</title>
+<style>
+body{font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;max-width:860px;margin:32px auto;padding:0 20px;color:#1a1a1a;line-height:1.45}
+h1{margin:0 0 4px;font-size:26px}.sub{color:#666;margin-bottom:20px}
+.verdict{display:inline-block;padding:8px 18px;border-radius:8px;font-weight:700;font-size:22px;background:#c62828;color:#fff;margin:8px 0 18px}
+.verdict.go{background:#2e7d32}.verdict.pending{background:#8a6d00}
+.verdict small{font-weight:400;font-size:14px;opacity:.9}
+.card{border:1px solid #ddd;border-radius:10px;padding:14px 18px;margin:12px 0}
+.card h2{font-size:17px;margin:0 0 6px;display:flex;justify-content:space-between}
+.hold{color:#c62828}.na{color:#8a6d00}.pass{color:#2e7d32}
+.evidence{background:#fafafa}
+ul{margin:6px 0 0 18px;padding:0}li{margin:3px 0}code{background:#f3f3f3;padding:1px 5px;border-radius:4px}
+.foot{color:#666;font-size:13px;margin-top:22px}a{color:#1565c0}
+</style></head><body>
+<p style="margin:0 0 12px"><a href="index.html">&larr; Back to all boards</a></p>
+<h1>Novvler release readiness</h1>
+<div class="sub">Candidate: <a href="https://github.com/Mufassa12/surferwriter/pull/189">PR #189</a> "Record xAI provenance on every Imagine image" at <a href="https://github.com/Mufassa12/surferwriter/commit/b8de7ce7d23844fd6aed1aef535a1f13e6a2159e">b8de7ce</a> · base <code>main</code> at c967f92 · Repo <a href="https://github.com/Mufassa12/surferwriter">Mufassa12/surferwriter</a> · Updated 21 Oct 2026, NZDT by Release Captain</div>
+<div class="verdict go" id="overall">GO <small>(awaiting Shaun's go or no-go)</small></div>
+<p>Includes all of PR #188 (labelling), plus provenance, the dock badge fix and the recheck limit. All four checks are in: Code Risk GO, Quality PASS with named gaps, AI Trust PASS, Metrics PASS on the production baseline. Nothing has been merged or deployed.</p>
+
+<div class="card"><h2>Code Risk <span class="pass">GO (confidence 0.88)</span></h2>
+Self-built review. The earlier medium (recheck cost) is fixed and nothing medium or high remains. <a href="https://cursor.com/agents/bc-88319d52-16b2-5c01-bf64-045917e4bb18">Review agent</a>
+<ul>
+<li>Cooldown and allowance are checked before the image download or the Grok call.</li>
+<li>A refused recheck keeps no credit. With concurrent rechecks only one proceeds. A failed vision call refunds the credit.</li>
+<li>Refusals return 402 or 429 with <code>Retry-After</code>.</li>
+<li>Migration 037 adds a nullable <code>recheck_at</code> column and is safe.</li>
+<li>Low: the webhook URL from env config accepts any host (redirects off, 5s timeout).</li>
+<li>Low: 036's <code>CHECK</code> takes a brief lock on small tables.</li>
+</ul></div>
+
+<div class="card"><h2>Quality <span class="pass">PASS (with gaps)</span></h2>
+Every required check in <a href="https://github.com/Mufassa12/surferwriter/actions/runs/39472121020">CI run 39472121020</a> ran and passed.
+<ul>
+<li>Backend: clippy clean, <code>cargo test</code> 212 passed, 0 failed, 0 ignored (7:15 AM NZDT). Includes <code>recheck_past_the_allowance_does_not_call_the_vision_client</code>, <code>recheck_inside_the_cooldown_does_not_call_the_vision_client</code>, <code>recheck_after_the_cooldown_runs_when_allowance_remains</code>, <code>recheck_cooldown_sends_retry_after_and_the_allowance_is_payment_required</code>, the migration test and the not-AI mismatch test. No <code>XAI_API_KEY</code> in CI.</li>
+<li>Frontend: 430 node tests passed, 0 skipped. Website passed.</li>
+<li>Gaps (not blockers): no coverage reporting, no end-to-end tests, 4 frontend test files not run in CI.</li>
+</ul></div>
+
+<div class="card" id="aitrust"><h2>AI Trust <span class="pass">PASS</span></h2>
+Final PASS at b8de7ce: Backend, Frontend and Website CI all green; auto-merge skipped as expected.
+<ul>
+<li>The badge is driven by the stored generation record (provider <code>xai</code>, model, <code>ai_generated</code>).</li>
+<li>Full "AI-generated" text shows in the dock (compact).</li>
+<li>The vision result never changes the record. A "not AI" result sets <code>vision_mismatch</code> and keeps the badge.</li>
+<li><code>AGENTS.md</code> wording is accurate. Migration 037 only touches <code>recheck_at</code>.</li>
+<li>Follow-up, not a blocker: C2PA/XMP file metadata.</li>
+</ul></div>
+
+<div class="card"><h2>Metrics <span class="pass">PASS (production baseline)</span></h2>
+Metrics: PASS on the production baseline. Latency and error rates are healthy, with no 5xx errors in the last 24 hours.</div>
+
+<div class="card evidence"><h2>Evidence: live vision sample <span class="na">SINGLE TEST CALL</span></h2>
+Imagine pencil sketch of a lighthouse: a single test call, not stored in Novvler.
+<ul>
+<li>Vision JSON: <code>ai_generated: false</code>, confidence 0.85.</li>
+<li>The "not AI" answer was flagged (<code>vision_mismatch</code>), not sent for review; the AI-generated label stays.</li>
+</ul></div>
+
+<div class="card"><h2>Decision needed from Shaun</h2>
+Decision: Shaun's go or no-go. Release Captain never merges or deploys.</div>
+<div class="foot" id="mainhold">Note: <code>main</code> at c967f92 remains <span class="hold"><b>HOLD</b></span> until a fix is merged.</div>
+<div class="foot">Rules: any missing, failed or malformed check is HOLD. If an AI verdict disagrees with CI, both sides go to Shaun. Generated 21 Oct 2026, NZDT.</div>
+</body></html>

@@ -1,0 +1,51 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Novvler readiness · c967f92</title>
+<style>
+body{font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;max-width:860px;margin:32px auto;padding:0 20px;color:#1a1a1a;line-height:1.45}
+h1{margin:0 0 4px;font-size:26px}.sub{color:#666;margin-bottom:20px}
+.verdict{display:inline-block;padding:8px 18px;border-radius:8px;font-weight:700;font-size:22px;background:#c62828;color:#fff;margin:8px 0 18px}
+.card{border:1px solid #ddd;border-radius:10px;padding:14px 18px;margin:12px 0}
+.card h2{font-size:17px;margin:0 0 6px;display:flex;justify-content:space-between}
+.hold{color:#c62828}.na{color:#8a6d00}.pass{color:#2e7d32}
+ul{margin:6px 0 0 18px;padding:0}li{margin:3px 0}code{background:#f3f3f3;padding:1px 5px;border-radius:4px}
+.foot{color:#666;font-size:13px;margin-top:22px}a{color:#1565c0}
+</style></head><body>
+<p style="margin:0 0 12px"><a href="index.html">&larr; Back to all boards</a></p>
+<h1>Novvler release readiness</h1>
+<div class="sub">Candidate: <code>main</code> at <a href="https://github.com/Mufassa12/surferwriter/commit/c967f92b5e72b64e1e0955c48e48ff1beadadf27">c967f92</a> (PR #186, deployed 19 Oct 2026, 6:30pm NZDT) · Repo <a href="https://github.com/Mufassa12/surferwriter">Mufassa12/surferwriter</a> · Updated 20 Oct 2026, 10:18pm NZDT by Release Captain</div>
+<div class="verdict">HOLD</div>
+<p>Nothing is failing: CI is green and Supabase shows no errors. The HOLD comes from unlabelled AI images (AI Trust) and unmeasured backend health (Metrics). Quality passes with named gaps. No AI verdict contradicts CI, so nothing needs escalating as a disagreement.</p>
+
+<div class="card"><h2>AI Trust <span class="hold">HOLD</span></h2>
+Grok images (<code>grok-imagine-image-2.0</code>, called from <code>backend/src/images.rs</code> L598–622) ship unlabelled and only partly traceable.
+<ul>
+<li>There's no visible "AI-generated" label on portraits or covers, in 7 frontend views.</li>
+<li>Alt text is neutral ("X's picture", "Book cover").</li>
+<li><code>character_looks</code> and <code>book_covers</code> don't store the provider or model. <code>ai_token_usage</code> has no image id.</li>
+<li>Stored files carry no provenance metadata (no XMP, C2PA or storage metadata).</li>
+<li>The terms and privacy pages don't mention AI image generation.</li>
+</ul></div>
+
+<div class="card"><h2>Quality <span class="pass">PASS (with gaps)</span></h2>
+Revised from HOLD under Shaun's coverage policy. All 10 check runs on the head passed and none were skipped (<a href="https://github.com/Mufassa12/surferwriter/actions/runs/39203800204">CI</a>, <a href="https://github.com/Mufassa12/surferwriter/actions/runs/39204393057">Deploy</a>). The last 32 CI pushes to main passed first time, and no skip markers were found. These gaps don't block:
+<ul>
+<li>No coverage is reported yet.</li>
+<li>The main ruleset can't be read, and the Frontend check may not be required to merge. It ran and passed here anyway.</li>
+<li>4 of 52 frontend test files never run, because CI lists them by hand.</li>
+<li>There are no end-to-end tests, and the smoke test only checks for HTTP 200.</li>
+</ul></div>
+
+<div class="card"><h2>Metrics <span class="hold">HOLD</span></h2>
+The data that was readable is clean: Supabase auth and storage showed no errors.
+<ul><li>Missing: Rust backend latency and errors in Cloud Run. Read-only access is pending with Shaun.</li></ul></div>
+
+<div class="card"><h2>Code Risk <span class="na">NOT RUN</span></h2>
+There's no release diff to review on the baseline. The first verdict comes with the first readiness run (on the next merge to main). Code Risk notes:
+<ul>
+<li>Migrations run at backend startup and a push to main deploys immediately, so put the new provenance columns in a separate PR and make them nullable or give them defaults.</li>
+<li><code>AGENTS.md</code> says the frontend has no test runner, but CI runs 48 test files. The review agent will trust the CI list until that's fixed.</li>
+</ul></div>
+
+<div class="card"><h2>Decision needed from Shaun</h2>
+Go or no-go on starting the AI-label fix (built by Novvler Eng Agent, which uses Cursor usage). Nothing starts without an explicit yes, typed or spoken.<ul><li>Small fix item: <code>AGENTS.md</code> wrongly says the frontend has no test runner (CI runs 48 test files). Correcting it lets Code Risk's review agent judge frontend test coverage properly.</li></ul> Release Captain never merges, deploys or changes code.</div>
+<div class="foot">Rules: any missing, failed or malformed check is HOLD. If an AI verdict disagrees with CI, both sides go to Shaun. A new readiness run opens automatically on every PR merged to main.</div>
+</body></html>
