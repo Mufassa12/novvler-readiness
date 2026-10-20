@@ -22,7 +22,7 @@ ul{margin:6px 0 0 18px;padding:0}li{margin:3px 0}code{background:#f3f3f3;padding
 <h1>Novvler release readiness</h1>
 <div class="sub">Candidate: PR #191 "Record xAI provenance on Imagine images + release-readiness skill" at 0b41b0b · base <code>main</code> at c967f92 · Repo Mufassa12/surferwriter · Updated 21 Oct 2026, 10:40am NZDT by Release Captain</div></header>
 <div class="verdict go" id="overall">GO <small>(awaiting Shaun's go or no-go)</small></div>
-<p>PR #189's code (labelling and provenance for Imagine images) plus one docs file: Shaun's release-readiness review skill (<code>.cursor/skills/release-readiness/SKILL.md</code>). All four checks are in on the same head: Code Risk GO, Quality PASS with named gaps, AI Trust PASS, Metrics PASS on the production baseline. No AI verdict disagrees with CI. Nothing has been merged or deployed.</p>
+<p>Labelling and provenance for Imagine images plus one docs file: Shaun's release-readiness review skill (<code>.cursor/skills/release-readiness/SKILL.md</code>). All four checks are in on the same head: Code Risk GO, Quality PASS with named gaps, AI Trust PASS, Metrics PASS on the production baseline. No AI verdict disagrees with CI. Nothing has been merged or deployed.</p>
 
 <div class="card" id="code-risk"><h2>Code Risk <span class="pass">GO (confidence 0.86)</span></h2>
 Read-only review guided by the release-readiness skill: all seven instructions were pasted word for word into the review agent's prompt, and it returned the skill's JSON verdict exactly as below.
@@ -38,14 +38,13 @@ Every required check in CI run 39501015688 ran and passed; none were cancelled o
 <ul>
 <li>Backend: 212 tests passed, 0 failed, 0 ignored (10:37am NZDT), including the recheck-limit tests and the migration test.</li>
 <li>Frontend: 430 node tests passed, 0 skipped, including <code>aiImageLabel.test.mjs</code>. Website passed.</li>
-<li>Same counts as #189 at b8de7ce. The only new commit is the docs-only skill file, and no skip markers were added.</li>
+<li>No skip markers were added.</li>
 <li>Gaps (not blockers): no coverage reporting, no end-to-end tests, 4 frontend test files not run in CI.</li>
 </ul></div>
 
 <div class="card" id="ai-trust"><h2>AI Trust <span class="pass">PASS</span></h2>
 Final PASS at 0b41b0b with Backend, Frontend and Website CI green.
 <ul>
-<li>The only change since #189's b8de7ce is the docs-only skill file, so labelling and provenance carry over unchanged.</li>
 <li>Imagine images are saved with provider <code>xai</code>, the model and <code>ai_generated = true</code>; the badge and AI alt text read from that record.</li>
 <li>A "not AI" vision answer only sets <code>vision_mismatch</code> and the label stays (CI test passed).</li>
 <li>The new skill makes "AI images labelled from the record" a rule the code review must check.</li>
@@ -56,7 +55,6 @@ Final PASS at 0b41b0b with Backend, Frontend and Website CI green.
 
 <div class="card"><h2>Decision needed from Shaun</h2>
 Decision: Shaun's go or no-go. Release Captain never merges or deploys.</div>
-<div class="foot">Background: PR #189 at b8de7ce (the same code without the skill) was assessed earlier and is also GO. See its <a href="pr189-b8de7ce.html">board</a>.</div>
 <div class="foot" id="mainhold">Note: <code>main</code> at c967f92 remains <span class="hold"><b>HOLD</b></span> until a fix is merged. See the <a href="main-c967f92.html">main board</a>.</div>
 <div class="foot">Rules: any missing, failed or malformed check is HOLD. If an AI verdict disagrees with CI, both sides go to Shaun. Generated 21 Oct 2026, NZDT.</div>
 </body></html>
