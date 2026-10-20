@@ -19,7 +19,7 @@ ul{margin:6px 0 0 18px;padding:0}li{margin:3px 0}code{background:#f3f3f3;padding
 <h1>Novvler release readiness</h1>
 <div class="sub">Candidate: <code>main</code> at c967f92 (PR #186, deployed 19 Oct 2026, 6:30pm NZDT) · Repo Mufassa12/surferwriter · Updated 20 Oct 2026, 10:18pm NZDT by Release Captain</div></header>
 <div class="verdict">HOLD</div>
-<p>Nothing is failing: CI is green and Supabase shows no errors. The HOLD comes from unlabelled AI images (AI Trust) and unmeasured backend health (Metrics). Quality passes with named gaps. No AI verdict contradicts CI, so nothing needs escalating as a disagreement.</p>
+<p>Nothing is failing: CI is green and Supabase shows no errors. The HOLD comes from unlabelled AI images (AI Trust). Metrics passes on the production baseline. Quality passes with named gaps. No AI verdict contradicts CI, so nothing needs escalating as a disagreement.</p>
 
 <div class="card" id="ai-trust"><h2>AI Trust <span class="hold">HOLD</span></h2>
 Grok images (<code>grok-imagine-image-2.0</code>, called from <code>backend/src/images.rs</code> L598–622) ship unlabelled and only partly traceable.
@@ -39,9 +39,8 @@ Revised from HOLD under Shaun's coverage policy. All 10 check runs on the head p
 <li>There are no end-to-end tests, and the smoke test only checks for HTTP 200.</li>
 </ul></div>
 
-<div class="card" id="metrics"><h2>Metrics <span class="hold">HOLD</span></h2>
-The data that was readable is clean: Supabase auth and storage showed no errors.
-<ul><li>Missing: Rust backend latency and errors in Cloud Run. Read-only access is pending with Shaun.</li></ul></div>
+<div class="card" id="metrics"><h2>Metrics <span class="pass">PASS</span></h2>
+PASS on the production baseline. Latency and error rates are healthy, with no 5xx errors in the last 24 hours. Backend monitoring is now readable, so no metrics data is missing.</div>
 
 <div class="card" id="code-risk"><h2>Code Risk <span class="na">NOT RUN</span></h2>
 There's no release diff to review on the baseline. The first verdict comes with the first readiness run (on the next merge to main). Code Risk notes:
