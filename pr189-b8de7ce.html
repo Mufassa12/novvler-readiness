@@ -1,6 +1,6 @@
 <!doctype html><html><head><meta charset="utf-8"><title>Novvler readiness · PR #189 · b8de7ce</title>
 <style>
-body{font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;max-width:860px;margin:32px auto;padding:0 20px;color:#1a1a1a;line-height:1.45}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;max-width:860px;margin:32px auto;padding:0 20px;color:#1a1a1a;line-height:1.45}
 h1{margin:0 0 4px;font-size:26px}.sub{color:#666;margin-bottom:20px}
 .verdict{display:inline-block;padding:8px 18px;border-radius:8px;font-weight:700;font-size:22px;background:#c62828;color:#fff;margin:8px 0 18px}
 .verdict.go{background:#2e7d32}.verdict.pending{background:#8a6d00}
@@ -11,14 +11,20 @@ h1{margin:0 0 4px;font-size:26px}.sub{color:#666;margin-bottom:20px}
 .evidence{background:#fafafa}
 ul{margin:6px 0 0 18px;padding:0}li{margin:3px 0}code{background:#f3f3f3;padding:1px 5px;border-radius:4px}
 .foot{color:#666;font-size:13px;margin-top:22px}a{color:#1565c0}
-</style></head><body>
-<p style="margin:0 0 12px"><a href="index.html">&larr; Back to all boards</a></p>
+.hdr{background:#fff;border:1px solid #e3e6ea;border-left:6px solid #2f6fe4;border-radius:14px;padding:16px 22px;margin:0 0 18px;box-shadow:0 1px 3px rgba(16,24,40,.06)}
+.eyebrow{color:#2f6fe4;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin:0 0 4px}
+.hdr h1{font-size:26px;margin:0 0 6px;color:#111827}.hdr .sub{margin:0}
+.back{display:inline-block;margin:0 0 12px;font-size:14px;text-decoration:none}
+@media(max-width:600px){body{margin:16px auto}.hdr h1{font-size:22px}}
+</style><meta name="viewport" content="width=device-width,initial-scale=1"></head><body>
+<a class="back" href="index.html">&larr; Back to all boards</a>
+<header class="hdr"><p class="eyebrow">Published by Release Captain</p>
 <h1>Novvler release readiness</h1>
-<div class="sub">Candidate: PR #189 "Record xAI provenance on every Imagine image" at b8de7ce · base <code>main</code> at c967f92 · Repo Mufassa12/surferwriter · Updated 21 Oct 2026, NZDT by Release Captain</div>
+<div class="sub">Candidate: PR #189 "Record xAI provenance on every Imagine image" at b8de7ce · base <code>main</code> at c967f92 · Repo Mufassa12/surferwriter · Updated 21 Oct 2026, NZDT by Release Captain</div></header>
 <div class="verdict go" id="overall">GO <small>(awaiting Shaun's go or no-go)</small></div>
 <p>Includes all of PR #188 (labelling), plus provenance, the dock badge fix and the recheck limit. All four checks are in: Code Risk GO, Quality PASS with named gaps, AI Trust PASS, Metrics PASS on the production baseline. Nothing has been merged or deployed.</p>
 
-<div class="card"><h2>Code Risk <span class="pass">GO (confidence 0.88)</span></h2>
+<div class="card" id="code-risk"><h2>Code Risk <span class="pass">GO (confidence 0.88)</span></h2>
 Self-built review. The earlier medium (recheck cost) is fixed and nothing medium or high remains. Review agent
 <ul>
 <li>Cooldown and allowance are checked before the image download or the Grok call.</li>
@@ -29,7 +35,7 @@ Self-built review. The earlier medium (recheck cost) is fixed and nothing medium
 <li>Low: 036's <code>CHECK</code> takes a brief lock on small tables.</li>
 </ul></div>
 
-<div class="card"><h2>Quality <span class="pass">PASS (with gaps)</span></h2>
+<div class="card" id="quality"><h2>Quality <span class="pass">PASS (with gaps)</span></h2>
 Every required check in CI run 39472121020 ran and passed.
 <ul>
 <li>Backend: clippy clean, <code>cargo test</code> 212 passed, 0 failed, 0 ignored (7:15 AM NZDT). Includes <code>recheck_past_the_allowance_does_not_call_the_vision_client</code>, <code>recheck_inside_the_cooldown_does_not_call_the_vision_client</code>, <code>recheck_after_the_cooldown_runs_when_allowance_remains</code>, <code>recheck_cooldown_sends_retry_after_and_the_allowance_is_payment_required</code>, the migration test and the not-AI mismatch test. No live API key in CI.</li>
@@ -37,7 +43,7 @@ Every required check in CI run 39472121020 ran and passed.
 <li>Gaps (not blockers): no coverage reporting, no end-to-end tests, 4 frontend test files not run in CI.</li>
 </ul></div>
 
-<div class="card" id="aitrust"><h2>AI Trust <span class="pass">PASS</span></h2>
+<div class="card" id="ai-trust"><h2>AI Trust <span class="pass">PASS</span></h2>
 Final PASS at b8de7ce: Backend, Frontend and Website CI all green; auto-merge skipped as expected.
 <ul>
 <li>The badge is driven by the stored generation record (provider <code>xai</code>, model, <code>ai_generated</code>).</li>
@@ -47,7 +53,7 @@ Final PASS at b8de7ce: Backend, Frontend and Website CI all green; auto-merge sk
 <li>Follow-up, not a blocker: C2PA/XMP file metadata.</li>
 </ul></div>
 
-<div class="card"><h2>Metrics <span class="pass">PASS (production baseline)</span></h2>
+<div class="card" id="metrics"><h2>Metrics <span class="pass">PASS (production baseline)</span></h2>
 Metrics: PASS on the production baseline. Latency and error rates are healthy, with no 5xx errors in the last 24 hours.</div>
 
 <div class="card evidence"><h2>Evidence: live vision sample <span class="na">SINGLE TEST CALL</span></h2>

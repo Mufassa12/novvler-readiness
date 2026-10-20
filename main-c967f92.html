@@ -1,6 +1,6 @@
 <!doctype html><html><head><meta charset="utf-8"><title>Novvler readiness · c967f92</title>
 <style>
-body{font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;max-width:860px;margin:32px auto;padding:0 20px;color:#1a1a1a;line-height:1.45}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;max-width:860px;margin:32px auto;padding:0 20px;color:#1a1a1a;line-height:1.45}
 h1{margin:0 0 4px;font-size:26px}.sub{color:#666;margin-bottom:20px}
 .verdict{display:inline-block;padding:8px 18px;border-radius:8px;font-weight:700;font-size:22px;background:#c62828;color:#fff;margin:8px 0 18px}
 .card{border:1px solid #ddd;border-radius:10px;padding:14px 18px;margin:12px 0}
@@ -8,14 +8,20 @@ h1{margin:0 0 4px;font-size:26px}.sub{color:#666;margin-bottom:20px}
 .hold{color:#c62828}.na{color:#8a6d00}.pass{color:#2e7d32}
 ul{margin:6px 0 0 18px;padding:0}li{margin:3px 0}code{background:#f3f3f3;padding:1px 5px;border-radius:4px}
 .foot{color:#666;font-size:13px;margin-top:22px}a{color:#1565c0}
-</style></head><body>
-<p style="margin:0 0 12px"><a href="index.html">&larr; Back to all boards</a></p>
+.hdr{background:#fff;border:1px solid #e3e6ea;border-left:6px solid #2f6fe4;border-radius:14px;padding:16px 22px;margin:0 0 18px;box-shadow:0 1px 3px rgba(16,24,40,.06)}
+.eyebrow{color:#2f6fe4;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin:0 0 4px}
+.hdr h1{font-size:26px;margin:0 0 6px;color:#111827}.hdr .sub{margin:0}
+.back{display:inline-block;margin:0 0 12px;font-size:14px;text-decoration:none}
+@media(max-width:600px){body{margin:16px auto}.hdr h1{font-size:22px}}
+</style><meta name="viewport" content="width=device-width,initial-scale=1"></head><body>
+<a class="back" href="index.html">&larr; Back to all boards</a>
+<header class="hdr"><p class="eyebrow">Published by Release Captain</p>
 <h1>Novvler release readiness</h1>
-<div class="sub">Candidate: <code>main</code> at c967f92 (PR #186, deployed 19 Oct 2026, 6:30pm NZDT) · Repo Mufassa12/surferwriter · Updated 20 Oct 2026, 10:18pm NZDT by Release Captain</div>
+<div class="sub">Candidate: <code>main</code> at c967f92 (PR #186, deployed 19 Oct 2026, 6:30pm NZDT) · Repo Mufassa12/surferwriter · Updated 20 Oct 2026, 10:18pm NZDT by Release Captain</div></header>
 <div class="verdict">HOLD</div>
 <p>Nothing is failing: CI is green and Supabase shows no errors. The HOLD comes from unlabelled AI images (AI Trust) and unmeasured backend health (Metrics). Quality passes with named gaps. No AI verdict contradicts CI, so nothing needs escalating as a disagreement.</p>
 
-<div class="card"><h2>AI Trust <span class="hold">HOLD</span></h2>
+<div class="card" id="ai-trust"><h2>AI Trust <span class="hold">HOLD</span></h2>
 Grok images (<code>grok-imagine-image-2.0</code>, called from <code>backend/src/images.rs</code> L598–622) ship unlabelled and only partly traceable.
 <ul>
 <li>There's no visible "AI-generated" label on portraits or covers, in 7 frontend views.</li>
@@ -25,7 +31,7 @@ Grok images (<code>grok-imagine-image-2.0</code>, called from <code>backend/src/
 <li>The terms and privacy pages don't mention AI image generation.</li>
 </ul></div>
 
-<div class="card"><h2>Quality <span class="pass">PASS (with gaps)</span></h2>
+<div class="card" id="quality"><h2>Quality <span class="pass">PASS (with gaps)</span></h2>
 Revised from HOLD under Shaun's coverage policy. All 10 check runs on the head passed and none were skipped (CI, Deploy). The last 32 CI pushes to main passed first time, and no skip markers were found. These gaps don't block:
 <ul>
 <li>No coverage is reported yet.</li>
@@ -33,11 +39,11 @@ Revised from HOLD under Shaun's coverage policy. All 10 check runs on the head p
 <li>There are no end-to-end tests, and the smoke test only checks for HTTP 200.</li>
 </ul></div>
 
-<div class="card"><h2>Metrics <span class="hold">HOLD</span></h2>
+<div class="card" id="metrics"><h2>Metrics <span class="hold">HOLD</span></h2>
 The data that was readable is clean: Supabase auth and storage showed no errors.
 <ul><li>Missing: Rust backend latency and errors in Cloud Run. Read-only access is pending with Shaun.</li></ul></div>
 
-<div class="card"><h2>Code Risk <span class="na">NOT RUN</span></h2>
+<div class="card" id="code-risk"><h2>Code Risk <span class="na">NOT RUN</span></h2>
 There's no release diff to review on the baseline. The first verdict comes with the first readiness run (on the next merge to main). Code Risk notes:
 <ul>
 <li>Migrations run at backend startup and a push to main deploys immediately, so put the new provenance columns in a separate PR and make them nullable or give them defaults.</li>
