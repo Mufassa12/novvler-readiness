@@ -1,0 +1,49 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Novvler readiness · main · a590efb</title>
+<style>
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;max-width:860px;margin:32px auto;padding:0 20px;color:#1a1a1a;line-height:1.45}
+h1{margin:0 0 4px;font-size:26px}.sub{color:#666;margin-bottom:20px}
+.verdict{display:inline-block;padding:8px 18px;border-radius:8px;font-weight:700;font-size:22px;background:#c62828;color:#fff;margin:8px 0 18px}
+.verdict.go{background:#2e7d32}.verdict.pending{background:#8a6d00}
+.verdict small{font-weight:400;font-size:14px;opacity:.9}
+.card{border:1px solid #ddd;border-radius:10px;padding:14px 18px;margin:12px 0}
+.card h2{font-size:17px;margin:0 0 6px;display:flex;justify-content:space-between}
+.hold{color:#c62828}.na{color:#8a6d00}.pass{color:#2e7d32}
+.evidence{background:#fafafa}
+ul{margin:6px 0 0 18px;padding:0}li{margin:3px 0}code{background:#f3f3f3;padding:1px 5px;border-radius:4px}
+.foot{color:#666;font-size:13px;margin-top:22px}a{color:#1565c0}
+.hdr{background:#fff;border:1px solid #e3e6ea;border-left:6px solid #2f6fe4;border-radius:14px;padding:16px 22px;margin:0 0 18px;box-shadow:0 1px 3px rgba(16,24,40,.06)}
+.eyebrow{color:#2f6fe4;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin:0 0 4px}
+.hdr h1{font-size:26px;margin:0 0 6px;color:#111827}.hdr .sub{margin:0}
+.back{display:inline-block;margin:0 0 12px;font-size:14px;text-decoration:none}
+@media(max-width:600px){body{margin:16px auto}.hdr h1{font-size:22px}}
+</style><meta name="viewport" content="width=device-width,initial-scale=1"></head><body>
+<a class="back" href="index.html">&larr; Back to all boards</a>
+<header class="hdr"><p class="eyebrow">Published by Release Captain</p>
+<h1>Novvler release readiness</h1>
+<div class="sub">Candidate: <code>main</code> at a590efb (merge of PR #191, merged by Shaun 21 Oct 2026, 7:05pm NZDT) · Repo Mufassa12/surferwriter · Updated 21 Oct 2026, 7:34pm NZDT by Release Captain</div></header>
+<div class="verdict pending" id="overall">HOLD <small>(pending: a GO needs all four checks in)</small></div>
+<p>a590efb has code identical to PR #191's reviewed commit 0b41b0b. CI on a590efb passed at 7:12pm NZDT, and the deploy to production passed at 7:19pm NZDT with the smoke test OK. Nothing is failing: the HOLD is only because AI Trust and Metrics haven't posted final verdicts yet.</p>
+
+<div class="card" id="code-risk"><h2>Code Risk <span class="pass">GO (confidence 0.86)</span></h2>
+<ul>
+<li>The code matches the reviewed commit 0b41b0b, so the 0.86 GO from that review applies unchanged.</li>
+<li>CI and the deploy are green. No findings.</li>
+</ul></div>
+
+<div class="card" id="quality"><h2>Quality <span class="pass">PASS (with gaps)</span></h2>
+CI was fully green: backend and frontend tests all passed, with nothing skipped or flaky. These gaps don't block:
+<ul>
+<li>No coverage reporting.</li>
+<li>Some search tests don't run in CI.</li>
+<li>No end-to-end tests.</li>
+</ul></div>
+
+<div class="card" id="ai-trust"><h2>AI Trust <span class="na">PENDING</span></h2>
+The code passes, the same as on PR #191. The final PASS waits on confirming that production records provenance on new images.</div>
+
+<div class="card" id="metrics"><h2>Metrics <span class="na">PENDING</span></h2>
+Needs about 45 minutes of post-deploy traffic for the before-and-after comparison. Expected around 8:05pm NZDT.</div>
+
+<div class="foot">Previous main board: <a href="main-c967f92.html">main at c967f92 (HOLD, superseded)</a>.</div>
+<div class="foot">Rules: any missing, failed or malformed check is HOLD. If an AI verdict disagrees with CI, both sides go to Shaun. Release Captain never merges or deploys.</div>
+</body></html>
