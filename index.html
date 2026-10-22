@@ -27,33 +27,34 @@ code{background:#f3f4f6;padding:1px 5px;border-radius:5px;font-size:14px}
 <section class="card go">
 <p class="verdict">🟢 GO</p>
 <dl class="props">
-<dt>Release</dt><dd><code>main</code> at merge commit <code>0c10d6b</code>, the merge of PR #195</dd>
-<dt>What changed</dt><dd>Test-only end-to-end smoke fixes, plus safe defaults in the end-to-end workflow</dd>
+<dt>Release</dt><dd><code>main</code> at merge commit <code>ef7a0d1</code>, the merge of PR #196</dd>
+<dt>What changed</dt><dd>Adds the Grok vision check for AI-generated covers, a hand-started cover screenshot job, and a new CI job for the checker</dd>
 <dt>Blockers</dt><dd>None</dd>
-<dt>Merged</dt><dd>12:40 PM NZDT, 22 Oct 2026</dd>
-<dt>Deployed</dt><dd>12:53 PM NZDT, 22 Oct 2026</dd>
+<dt>Merged</dt><dd>11:37 PM NZDT, 22 Oct 2026</dd>
+<dt>Deployed</dt><dd>11:49 PM NZDT, 22 Oct 2026</dd>
 <dt>Run type</dt><dd>Post-merge</dd>
-<dt>Shaun's go/no-go</dt><dd>Not needed (post-merge run; Shaun merged it himself)</dd>
+<dt>Shaun's go/no-go</dt><dd>Go (Shaun approved the merge if the pre-merge run was GO)</dd>
 </dl>
 </section>
 
 <h2>Specialist verdicts</h2>
 <table>
 <tr><th>Check</th><th>Status</th><th>Evidence</th></tr>
-<tr><td>Code Risk</td><td><span class="pill p-go">GO · 0.93</span></td><td>No findings. The workflow change only adds safe defaults, with no change to secrets or triggers.</td></tr>
-<tr><td>Quality</td><td><span class="pill p-go">PASS</span></td><td>Backend, Frontend and Website checks all passed. Coverage held against the baseline.</td></tr>
-<tr><td>AI Trust</td><td><span class="pill p-go">PASS</span></td><td>No app code changed. The AI-generated badge test is unchanged and labelling wasn't touched.</td></tr>
-<tr><td>Metrics</td><td><span class="pill p-go">PASS</span></td><td>First 5 minutes on the new release: no errors, and latency in line with the previous release.</td></tr>
-<tr><td>AI Trust: Grok vision check</td><td><span class="pill p-pend">PENDING</span></td><td>Being built. Once live, this row will show whether the AI-generated badge is visible and matches the image's stored label.</td></tr>
+<tr><td>Code Risk</td><td><span class="pill p-go">GO · 0.86</span></td><td>The merged change matches the reviewed commit. No medium or high risks; two minor notes on the screenshot test carry over.</td></tr>
+<tr><td>Quality</td><td><span class="pill p-go">PASS</span></td><td>Backend, Frontend, Website and the new AI Trust vision job all passed. Coverage held. End-to-end smoke passed on the merged commit.</td></tr>
+<tr><td>AI Trust</td><td><span class="pill p-go">PASS</span></td><td>Cover provenance is recorded and the AI-generated label is set.</td></tr>
+<tr><td>Metrics</td><td><span class="pill p-go">PASS</span></td><td>First 5 minutes on the new release: no errors, and latency in line with or better than the previous release.</td></tr>
+<tr><td>AI Trust: Grok vision check</td><td><span class="pill p-go">PASS</span></td><td>First live run. A screenshot of the cover in the app was checked by Grok vision: the AI-generated badge is visible, the image looks AI-made, and it matches the stored label. The test cover was drawn once on this first run, as expected.</td></tr>
 </table>
-<p class="note">Metrics note: a small number of server errors appeared about an hour after the deploy. Engineering believes they're unrelated to this release and is confirming the route. This doesn't change the verdict.</p>
+<p class="note">How the vision check works: after a release, AI Trust signs in to the app as a test user, screenshots a cover, and asks Grok vision whether the AI-generated badge is showing and whether the image looks AI-made. The app itself also calls Grok twice per cover: once to create the image and once to check it.</p>
 
 <h2>Run history</h2>
 <table>
 <tr><th>When (NZDT)</th><th>Release</th><th>Verdict</th><th>Summary</th></tr>
+<tr><td>23 Oct, 6:18 AM</td><td><code>main</code> at <code>ef7a0d1</code> (PR #196)</td><td><span class="pill p-go">GO</span></td><td>Latest run, shown above. First live Grok vision check passed.</td></tr>
 <tr><td>22 Oct, 11:36 PM</td><td>PR #196 at <code>a99961e</code> (Grok vision screenshot job, permission fix)</td><td><span class="pill p-go">GO</span></td><td>Code Risk GO after the one-line fix. Quality and AI Trust passed. Metrics checks the first 5 minutes after deploy. Merging on Shaun&#39;s yes.</td></tr>
 <tr><td>22 Oct, 11:19 PM</td><td>PR #196 at <code>5306009</code> (Grok vision screenshot job)</td><td><span class="pill p-hold">HOLD</span></td><td>Code Risk HOLD on one unneeded workflow permission (a one-line fix). Quality and AI Trust passed. Waiting on Shaun.</td></tr>
-<tr><td>22 Oct, 12:40 PM</td><td><code>main</code> at <code>0c10d6b</code> (PR #195)</td><td><span class="pill p-go">GO</span></td><td>Latest run, shown above.</td></tr>
+<tr><td>22 Oct, 12:40 PM</td><td><code>main</code> at <code>0c10d6b</code> (PR #195)</td><td><span class="pill p-go">GO</span></td><td>Code Risk 0.93; all other checks passed.</td></tr>
 <tr><td>22 Oct, 10:30 AM</td><td>PR #194 at <code>fd914e3</code> (demo AI-label break)</td><td><span class="pill p-hold">HOLD</span></td><td>Code Risk, Quality and AI Trust all caught a change that hid the AI-generated badge. CI and the AI reviews agreed. Shaun said no-go and the PR was closed unmerged.</td></tr>
 <tr><td>22 Oct, ~7:20 AM</td><td><code>main</code> at <code>1441aa2</code> (PR #193)</td><td><span class="pill p-go">GO</span></td><td>Code Risk 0.88; all other checks passed.</td></tr>
 </table>
@@ -68,5 +69,5 @@ code{background:#f3f4f6;padding:1px 5px;border-radius:5px;font-size:14px}
 <li>Only Code Risk gives a confidence number. It's the model's own judgement and isn't calibrated; the fixed gates decide the verdict.</li>
 <li>No agent merges or deploys. Only Shaun approves a merge.</li>
 </ul>
-<p class="foot">Published by Release Captain. Last updated 22 Oct 2026, 11:36 PM NZDT.</p>
+<p class="foot">Published by Release Captain. Last updated 23 Oct 2026, 6:20 AM NZDT.</p>
 </body></html>
