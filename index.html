@@ -1,51 +1,70 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Novvler release readiness</title>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Novvler Release Readiness</title>
 <style>
 *{box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;background:#f6f7f9;color:#111827;max-width:720px;margin:40px auto;padding:0 20px;line-height:1.5}
-h1{font-size:28px;margin:0 0 8px}.intro{color:#4b5563;margin:0 0 24px}
-.board{background:#fff;border:1px solid #e3e6ea;border-left:6px solid #2f6fe4;border-radius:16px;padding:18px 24px 16px;margin:0 0 18px;box-shadow:0 1px 3px rgba(16,24,40,.06)}
-.eyebrow{color:#2f6fe4;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin:0 0 4px}
-.board h2{font-size:26px;font-weight:700;margin:0}
-.subt{color:#4b5563;font-size:15px;margin:2px 0 14px}
-.checks{display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;list-style:none;margin:0 0 12px;padding:0}
-.checks a{display:flex;align-items:center;gap:12px;font-size:19px;color:#111827;text-decoration:none}
-.checks a:hover{text-decoration:underline}
-.dot{width:16px;height:16px;border-radius:50%;flex:none}
-.green{background:#43a047}.amber{background:#f0a531}.red{background:#d32f2f}.grey{background:#fff;border:2px solid #9ca3af}
-.foot{color:#6b7280;font-size:14px;margin:0}
-.legend{color:#4b5563;font-size:14px;margin:6px 0 0}
-.sr{position:absolute;left:-9999px}
-@media(max-width:520px){.checks{grid-template-columns:1fr}.board h2{font-size:22px}}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;background:#f6f7f9;color:#111827;max-width:960px;margin:40px auto;padding:0 20px;line-height:1.5}
+h1{font-size:28px;margin:0 0 6px}h2{font-size:20px;margin:28px 0 10px}
+.intro{color:#4b5563;margin:0 0 20px}
+.card{background:#fff;border:1px solid #e3e6ea;border-radius:14px;padding:18px 22px;margin:0 0 16px;box-shadow:0 1px 3px rgba(16,24,40,.06)}
+.go{border-left:6px solid #43a047}
+.verdict{font-size:26px;font-weight:700;margin:0}
+.props{display:grid;grid-template-columns:160px 1fr;gap:6px 16px;margin:12px 0 0;font-size:15px}
+.props dt{color:#6b7280}.props dd{margin:0}
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #e3e6ea;border-radius:12px;overflow:hidden;font-size:15px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid #eef0f3;vertical-align:top}
+th{background:#f9fafb;color:#374151;font-weight:600}
+.pill{display:inline-block;padding:2px 10px;border-radius:999px;font-size:13px;font-weight:600;white-space:nowrap}
+.p-go{background:#e8f5e9;color:#1b5e20}.p-hold{background:#fdecea;color:#b71c1c}.p-pend{background:#f3f4f6;color:#4b5563}
+.note{background:#fff8e1;border:1px solid #f6d77a;border-radius:10px;padding:12px 16px;margin:12px 0 0;font-size:15px}
+ul.rules{background:#fff;border:1px solid #e3e6ea;border-radius:12px;padding:14px 18px 14px 36px;margin:0}
+ul.rules li{margin:4px 0}
+code{background:#f3f4f6;padding:1px 5px;border-radius:5px;font-size:14px}
+.foot{color:#6b7280;font-size:13px;margin:28px 0 0}
+@media(max-width:640px){.props{grid-template-columns:1fr}}
 </style></head><body>
-<h1>Novvler release readiness</h1>
-<p class="intro">Four specialist checks (Code Risk, Quality, Metrics, AI Trust) feed one GO or HOLD. Any missing, failed or malformed check means HOLD. Shaun makes the final call; the Release Captain never merges or deploys.</p>
+<h1>Novvler Release Readiness</h1>
+<p class="intro">One GO or HOLD per release, built from four specialist checks. Updated in place on every run.</p>
 
-<section class="board">
-<p class="eyebrow">Published by Release Captain</p>
-<h2>PR #191 · merged</h2>
-<p class="subt">@ 0b41b0b · GO (history) · merged by Shaun 7:05pm NZDT</p>
-<ul class="checks">
-<li><a href="pr191-0b41b0b.html#code-risk" title="Code Risk: GO (confidence 0.86, release-readiness skill)"><span class="dot green"></span>Code Risk<span class="sr"> (go)</span></a></li>
-<li><a href="pr191-0b41b0b.html#quality" title="Quality: PASS (with gaps)"><span class="dot green"></span>Quality<span class="sr"> (pass)</span></a></li>
-<li><a href="pr191-0b41b0b.html#metrics" title="Metrics: PASS (production baseline)"><span class="dot green"></span>Metrics<span class="sr"> (pass)</span></a></li>
-<li><a href="pr191-0b41b0b.html#ai-trust" title="AI Trust: PASS"><span class="dot green"></span>AI Trust<span class="sr"> (pass)</span></a></li>
-</ul>
-<p class="foot">each check links to its evidence</p>
+<section class="card go">
+<p class="verdict">🟢 GO</p>
+<dl class="props">
+<dt>Release</dt><dd><code>main</code> at merge commit <code>0c10d6b</code>, the merge of PR #195</dd>
+<dt>What changed</dt><dd>Test-only end-to-end smoke fixes, plus safe defaults in the end-to-end workflow</dd>
+<dt>Blockers</dt><dd>None</dd>
+<dt>Merged</dt><dd>12:40 PM NZDT, 22 Oct 2026</dd>
+<dt>Deployed</dt><dd>12:53 PM NZDT, 22 Oct 2026</dd>
+<dt>Run type</dt><dd>Post-merge</dd>
+<dt>Shaun's go/no-go</dt><dd>Not needed (post-merge run; Shaun merged it himself)</dd>
+</dl>
 </section>
 
-<section class="board">
-<p class="eyebrow">Published by Release Captain</p>
-<h2>Current main</h2>
-<p class="subt">main @ a590efb (merge of #191) · HOLD (pending)</p>
-<ul class="checks">
-<li><a href="main-a590efb.html#code-risk" title="Code Risk: GO (confidence 0.86)"><span class="dot green"></span>Code Risk<span class="sr"> (go)</span></a></li>
-<li><a href="main-a590efb.html#quality" title="Quality: PASS (with gaps)"><span class="dot green"></span>Quality<span class="sr"> (pass)</span></a></li>
-<li><a href="main-a590efb.html#metrics" title="Metrics: pending, expected around 8:05pm NZDT"><span class="dot amber"></span>Metrics<span class="sr"> (pending)</span></a></li>
-<li><a href="main-a590efb.html#ai-trust" title="AI Trust: pending, code passes"><span class="dot amber"></span>AI Trust<span class="sr"> (pending)</span></a></li>
-</ul>
-<p class="foot">each check links to its evidence</p>
-</section>
+<h2>Specialist verdicts</h2>
+<table>
+<tr><th>Check</th><th>Status</th><th>Evidence</th></tr>
+<tr><td>Code Risk</td><td><span class="pill p-go">GO · 0.93</span></td><td>No findings. The workflow change only adds safe defaults, with no change to secrets or triggers.</td></tr>
+<tr><td>Quality</td><td><span class="pill p-go">PASS</span></td><td>Backend, Frontend and Website checks all passed. Coverage held against the baseline.</td></tr>
+<tr><td>AI Trust</td><td><span class="pill p-go">PASS</span></td><td>No app code changed. The AI-generated badge test is unchanged and labelling wasn't touched.</td></tr>
+<tr><td>Metrics</td><td><span class="pill p-go">PASS</span></td><td>First 5 minutes on the new release: no errors, and latency in line with the previous release.</td></tr>
+<tr><td>AI Trust: Grok vision check</td><td><span class="pill p-pend">PENDING</span></td><td>Being built. Once live, this row will show whether the AI-generated badge is visible and matches the image's stored label.</td></tr>
+</table>
+<p class="note">Metrics note: a small number of server errors appeared about an hour after the deploy. Engineering believes they're unrelated to this release and is confirming the route. This doesn't change the verdict.</p>
 
-<p class="legend">Green: pass. Amber: pending or data missing (hold). Red: hold, problem found. Any missing, failed or malformed check means HOLD.</p>
-<p class="legend">Updated 21 Oct 2026, 7:34pm NZDT by Release Captain.</p>
+<h2>Run history</h2>
+<table>
+<tr><th>When (NZDT)</th><th>Release</th><th>Verdict</th><th>Summary</th></tr>
+<tr><td>22 Oct, 12:40 PM</td><td><code>main</code> at <code>0c10d6b</code> (PR #195)</td><td><span class="pill p-go">GO</span></td><td>Latest run, shown above.</td></tr>
+<tr><td>22 Oct, 10:30 AM</td><td>PR #194 at <code>fd914e3</code> (demo AI-label break)</td><td><span class="pill p-hold">HOLD</span></td><td>Code Risk, Quality and AI Trust all caught a change that hid the AI-generated badge. CI and the AI reviews agreed. Shaun said no-go and the PR was closed unmerged.</td></tr>
+<tr><td>22 Oct, ~7:20 AM</td><td><code>main</code> at <code>1441aa2</code> (PR #193)</td><td><span class="pill p-go">GO</span></td><td>Code Risk 0.88; all other checks passed.</td></tr>
+</table>
+
+<h2>How the verdict works</h2>
+<ul class="rules">
+<li>One run per PR and head commit.</li>
+<li>Four specialists give one verdict each: Code Risk, Quality, AI Trust and Metrics.</li>
+<li>Every check has to pass. Any missing, failed or malformed check means HOLD.</li>
+<li>A required check that the CI path filter skips is fine when the PR doesn't touch that code.</li>
+<li>If an AI verdict disagrees with CI, both sides go to Shaun.</li>
+<li>Only Code Risk gives a confidence number. It's the model's own judgement and isn't calibrated; the fixed gates decide the verdict.</li>
+<li>No agent merges or deploys. Only Shaun approves a merge.</li>
+</ul>
+<p class="foot">Published by Release Captain. Last updated 22 Oct 2026.</p>
 </body></html>
