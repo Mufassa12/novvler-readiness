@@ -49,6 +49,7 @@ code{background:#f3f4f6;padding:1px 5px;border-radius:5px;font-size:14px}
 <h2>Run history</h2>
 <table>
 <tr><th>When (NZDT)</th><th>Release</th><th>Verdict</th><th>Summary</th></tr>
+<tr><td>23 Oct, 10:49 PM</td><td>PR #206 (demo break test)</td><td><span class="pill p-hold">HOLD</span></td><td>HOLD, as intended. A test change that hid the AI label on covers was caught by code review, the AI labelling check and the preview test. It was not merged.</td></tr>
 <tr><td>23 Oct, 10:06 PM</td><td>Main after #204 merge</td><td><span class="pill p-go">GO</span></td><td>Main after the deploy check fix merged: GO. Code review, tests and build, AI labelling and live health all passed, and the new deploy check worked on its first real run.</td></tr>
 <tr><td>23 Oct, 9:14 PM</td><td>PR #204, deploy check fix</td><td><span class="pill p-go">GO</span></td><td>Tightened fix. Code review confirmed both earlier gaps are closed, tests and AI labelling checks passed, and production was healthy. Shaun said yes and it merged at 9:44 PM; the check on main is running.</td></tr>
 <tr><td>23 Oct, 8:59 PM</td><td>PR #204, deploy check fix</td><td><span class="pill p-hold">HOLD</span></td><td>Tests, AI labelling and CI passed, but code review found two gaps: an empty job list could still let a deploy through, and the preview cleanup skip was too broad. A tightened fix has been pushed and is being re-checked.</td></tr>
@@ -87,5 +88,5 @@ code{background:#f3f4f6;padding:1px 5px;border-radius:5px;font-size:14px}
 <li>Only Code Risk gives a confidence number. It's the model's own judgement and isn't calibrated; the fixed gates decide the verdict.</li>
 <li>No agent merges or deploys. Only Shaun approves a merge.</li>
 </ul>
-<p class="foot">Published by Release Captain. Last updated 23 Oct 2026, 10:06 PM NZDT.</p>
+<p class="foot">Published by Release Captain. Last updated 23 Oct 2026, 10:49 PM NZDT.</p>
 </body></html>
