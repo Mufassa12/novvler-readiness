@@ -49,6 +49,7 @@ code{background:#f3f4f6;padding:1px 5px;border-radius:5px;font-size:14px}
 <h2>Run history</h2>
 <table>
 <tr><th>When (NZDT)</th><th>Release</th><th>Verdict</th><th>Summary</th></tr>
+<tr><td>23 Oct, 4:06 PM</td><td>main at <code>dd14262</code> (PR #200)</td><td><span class="pill p-hold">HOLD</span></td><td>The preview cleanup fix does not trigger when a real pull request closes, so cleanup still does not run. It fails safely and nothing is deployed. AI labelling checks passed. A follow-up fix is with engineering.</td></tr>
 <tr><td>23 Oct, 4:02 PM</td><td>main at <code>f34a19a</code> (PR #197)</td><td><span class="pill p-go">GO</span></td><td>Code, quality, AI labelling and live health checks passed. Shaun accepted two failed preview cleanup runs as a known low; the next fix (PR #200) solves their cause.</td></tr>
 <tr><td>23 Oct, 3:53 PM</td><td>PR #200 at <code>308c8e9</code></td><td><span class="pill p-go">GO</span></td><td>Fixes preview cleanup when a pull request closes. Code, quality and AI labelling checks passed, and previews still cannot make images. Merged on Shaun's go; a post-merge check is open.</td></tr>
 <tr><td>23 Oct, 3:36 PM</td><td>PR #197 at <code>8476df4</code></td><td><span class="pill p-go">GO</span></td><td>The preview unpacking issue is fixed, and previews now use their own limited sign-in. Shaun accepted two open items: an old wider sign-in that is removed after the first clean preview, and a preview check that can only pass after merge. Code, quality and AI labelling checks passed. Merged on Shaun's go.</td></tr>
@@ -76,5 +77,5 @@ code{background:#f3f4f6;padding:1px 5px;border-radius:5px;font-size:14px}
 <li>Only Code Risk gives a confidence number. It's the model's own judgement and isn't calibrated; the fixed gates decide the verdict.</li>
 <li>No agent merges or deploys. Only Shaun approves a merge.</li>
 </ul>
-<p class="foot">Published by Release Captain. Last updated 23 Oct 2026, 4:03 PM NZDT.</p>
+<p class="foot">Published by Release Captain. Last updated 23 Oct 2026, 4:07 PM NZDT.</p>
 </body></html>
