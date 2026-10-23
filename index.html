@@ -49,6 +49,7 @@ code{background:#f3f4f6;padding:1px 5px;border-radius:5px;font-size:14px}
 <h2>Run history</h2>
 <table>
 <tr><th>When (NZDT)</th><th>Release</th><th>Verdict</th><th>Summary</th></tr>
+<tr><td>23 Oct, 8:26 PM</td><td>Main after #203 merge</td><td><span class="pill p-hold">HOLD</span></td><td>Code review, tests, AI labelling and live health checks all passed, and production was unchanged with no errors. But the deploy workflow&#39;s final check failed on main because it treats a missing optional job as a failure. A fix PR is open.</td></tr>
 <tr><td>23 Oct, 8:14 PM</td><td>Main after #198 merge</td><td><span class="pill p-go">GO</span></td><td>Code review, tests, AI labelling and live health checks all passed, the deploy was green and the new release had no errors. A non-required preview cleanup job is red on a permissions gap; it doesn't affect production and is waiting on Shaun.</td></tr>
 <tr><td>23 Oct, 7:51 PM</td><td>PR #198, AI image label checks</td><td><span class="pill p-go">GO</span></td><td>Shaun approved the AI label sign-off himself and it went green. Code review, tests and AI labelling checks all passed. Merged to main at 7:52 PM; the main check is running.</td></tr>
 <tr><td>23 Oct, 6:07 PM</td><td>PR #203, preview link fix</td><td><span class="pill p-go">GO</span></td><td>Fixes how previews find their link. Code review passed, the self-test passed, and no AI content is touched. Merges after #198.</td></tr>
@@ -83,5 +84,5 @@ code{background:#f3f4f6;padding:1px 5px;border-radius:5px;font-size:14px}
 <li>Only Code Risk gives a confidence number. It's the model's own judgement and isn't calibrated; the fixed gates decide the verdict.</li>
 <li>No agent merges or deploys. Only Shaun approves a merge.</li>
 </ul>
-<p class="foot">Published by Release Captain. Last updated 23 Oct 2026, 8:14 PM NZDT.</p>
+<p class="foot">Published by Release Captain. Last updated 23 Oct 2026, 8:26 PM NZDT.</p>
 </body></html>
