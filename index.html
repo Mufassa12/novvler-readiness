@@ -27,35 +27,34 @@ code{background:#f3f4f6;padding:1px 5px;border-radius:5px;font-size:14px}
 <section class="card go">
 <p class="verdict">🟢 GO</p>
 <dl class="props">
-<dt>Release</dt><dd><code>main</code> at merge commit <code>ef7a0d1</code>, the merge of PR #196</dd>
-<dt>What changed</dt><dd>Adds the Grok vision check for AI-generated covers, a hand-started cover screenshot job, and a new CI job for the checker</dd>
+<dt>Release</dt><dd><code>main</code> at merge commit <code>e5eef44</code>, the merge of PR #199</dd>
+<dt>What changed</dt><dd>Tightens which sites the backend accepts requests from</dd>
 <dt>Blockers</dt><dd>None</dd>
-<dt>Merged</dt><dd>11:37 PM NZDT, 22 Oct 2026</dd>
-<dt>Deployed</dt><dd>11:49 PM NZDT, 22 Oct 2026</dd>
+<dt>Merged</dt><dd>1:51 PM NZDT, 23 Oct 2026</dd>
+<dt>Deployed</dt><dd>2:03 PM NZDT, 23 Oct 2026</dd>
 <dt>Run type</dt><dd>Post-merge</dd>
-<dt>Shaun's go/no-go</dt><dd>Go (Shaun approved the merge if the pre-merge run was GO)</dd>
+<dt>Shaun's go/no-go</dt><dd>Go (Shaun approved the merge after the pre-merge GO)</dd>
 </dl>
 </section>
 
 <h2>Specialist verdicts</h2>
 <table>
 <tr><th>Check</th><th>Status</th><th>Evidence</th></tr>
-<tr><td>Code Risk</td><td><span class="pill p-go">GO · 0.86</span></td><td>The merged change matches the reviewed commit. No medium or high risks; two minor notes on the screenshot test carry over.</td></tr>
-<tr><td>Quality</td><td><span class="pill p-go">PASS</span></td><td>Backend, Frontend, Website and the new AI Trust vision job all passed. Coverage held. End-to-end smoke passed on the merged commit.</td></tr>
-<tr><td>AI Trust</td><td><span class="pill p-go">PASS</span></td><td>Cover provenance is recorded and the AI-generated label is set.</td></tr>
+<tr><td>Code Risk</td><td><span class="pill p-go">GO · 0.86</span></td><td>The merged change is identical to the reviewed commit, and every deploy step passed, including the smoke test. One minor cleanup note: each deploy also redeploys the website and frontend.</td></tr>
+<tr><td>Quality</td><td><span class="pill p-go">PASS</span></td><td>All backend tests passed, including the new ones for this change, and coverage went up slightly. Frontend and Website were skipped because this change was backend-only.</td></tr>
+<tr><td>AI Trust</td><td><span class="pill p-go">PASS</span></td><td>No labelling or provenance code changed. The live vision check wasn't needed for a backend-only change.</td></tr>
 <tr><td>Metrics</td><td><span class="pill p-go">PASS</span></td><td>First 5 minutes on the new release: no errors, and latency in line with or better than the previous release.</td></tr>
-<tr><td>AI Trust: Grok vision check</td><td><span class="pill p-go">PASS</span></td><td>First live run. A screenshot of the cover in the app was checked by Grok vision: the AI-generated badge is visible, the image looks AI-made, and it matches the stored label. The test cover was drawn once on this first run, as expected.</td></tr>
 </table>
-<p class="note">How the vision check works: after a release, AI Trust signs in to the app as a test user, screenshots a cover, and asks Grok vision whether the AI-generated badge is showing and whether the image looks AI-made. The app itself also calls Grok twice per cover: once to create the image and once to check it.</p>
 
 <h2>Run history</h2>
 <table>
 <tr><th>When (NZDT)</th><th>Release</th><th>Verdict</th><th>Summary</th></tr>
+<tr><td>23 Oct, 2:17 PM</td><td><code>main</code> at <code>e5eef44</code> (PR #199)</td><td><span class="pill p-go">GO</span></td><td>Latest run, shown above. Merge matches what was reviewed; tests and AI labelling passed; no errors after deploy.</td></tr>
 <tr><td>23 Oct, 1:51 PM</td><td>PR #199 at <code>0d894a8</code></td><td><span class="pill p-go">GO</span></td><td>Tightens which sites the backend accepts. Code Risk GO 0.86; Quality and AI Trust passed. Shaun approved the merge.</td></tr>
 <tr><td>23 Oct, 1:51 PM</td><td>PR #197 at <code>b13e381</code></td><td><span class="pill p-hold">HOLD</span></td><td>Preview setup improved, but two medium security issues remain and the preview gate can&#39;t run until a script is on main. AI Trust passed. Sent back to engineering.</td></tr>
 <tr><td>23 Oct, 1:46 PM</td><td>PR #198 at <code>57faf75</code></td><td><span class="pill p-hold">HOLD</span></td><td>New badge tests work, but the new AI sign-off check doesn&#39;t enforce anything yet (Code Risk and AI Trust held; Quality passed). Sent back to engineering.</td></tr>
 <tr><td>23 Oct, 12:48 PM</td><td>PR #197 at <code>b3ae356</code></td><td><span class="pill p-hold">HOLD</span></td><td>Code Risk found a high and a medium security issue in the new preview setup; Quality held on preview jobs that did not run; AI Trust passed (labelling untouched). Sent back to engineering to fix.</td></tr>
-<tr><td>23 Oct, 6:18 AM</td><td><code>main</code> at <code>ef7a0d1</code> (PR #196)</td><td><span class="pill p-go">GO</span></td><td>Latest run, shown above. First live Grok vision check passed.</td></tr>
+<tr><td>23 Oct, 6:18 AM</td><td><code>main</code> at <code>ef7a0d1</code> (PR #196)</td><td><span class="pill p-go">GO</span></td><td>First live Grok vision check passed.</td></tr>
 <tr><td>22 Oct, 11:36 PM</td><td>PR #196 at <code>a99961e</code> (Grok vision screenshot job, permission fix)</td><td><span class="pill p-go">GO</span></td><td>Code Risk GO after the one-line fix. Quality and AI Trust passed. Metrics checks the first 5 minutes after deploy. Merging on Shaun&#39;s yes.</td></tr>
 <tr><td>22 Oct, 11:19 PM</td><td>PR #196 at <code>5306009</code> (Grok vision screenshot job)</td><td><span class="pill p-hold">HOLD</span></td><td>Code Risk HOLD on one unneeded workflow permission (a one-line fix). Quality and AI Trust passed. Waiting on Shaun.</td></tr>
 <tr><td>22 Oct, 12:40 PM</td><td><code>main</code> at <code>0c10d6b</code> (PR #195)</td><td><span class="pill p-go">GO</span></td><td>Code Risk 0.93; all other checks passed.</td></tr>
@@ -73,5 +72,5 @@ code{background:#f3f4f6;padding:1px 5px;border-radius:5px;font-size:14px}
 <li>Only Code Risk gives a confidence number. It's the model's own judgement and isn't calibrated; the fixed gates decide the verdict.</li>
 <li>No agent merges or deploys. Only Shaun approves a merge.</li>
 </ul>
-<p class="foot">Published by Release Captain. Last updated 23 Oct 2026, 1:55 PM NZDT.</p>
+<p class="foot">Published by Release Captain. Last updated 23 Oct 2026, 2:47 PM NZDT.</p>
 </body></html>
