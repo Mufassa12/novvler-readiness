@@ -49,6 +49,7 @@ code{background:#f3f4f6;padding:1px 5px;border-radius:5px;font-size:14px}
 <h2>Run history</h2>
 <table>
 <tr><th>When (NZDT)</th><th>Release</th><th>Verdict</th><th>Summary</th></tr>
+<tr><td>23 Oct, 5:07 PM</td><td>PR #202, preview cleanup permission</td><td><span class="pill p-go">GO</span></td><td>Lets the preview cleanup step read the pull request. Code review, tests and AI labelling checks passed, and the live smoke test showed the AI-generated badge on new covers. An earlier red smoke run was caused by the test account reaching its monthly image limit, not by a product fault. Production is healthy.</td></tr>
 <tr><td>23 Oct, 4:38 PM</td><td>main at <code>698b8b3</code> (PR #201)</td><td><span class="pill p-hold">HOLD</span></td><td>Both preview fixes work: closing a pull request now reaches the cleanup step, and previews are built from the right commit. Cleanup still stops because that step is not allowed to read the pull request. It fails safely and nothing is deployed. Tests and AI labelling checks passed. A small permission fix is with engineering.</td></tr>
 <tr><td>23 Oct, 4:06 PM</td><td>main at <code>dd14262</code> (PR #200)</td><td><span class="pill p-hold">HOLD</span></td><td>The preview cleanup fix does not trigger when a real pull request closes, so cleanup still does not run. It fails safely and nothing is deployed. AI labelling checks passed. A follow-up fix is with engineering.</td></tr>
 <tr><td>23 Oct, 4:02 PM</td><td>main at <code>f34a19a</code> (PR #197)</td><td><span class="pill p-go">GO</span></td><td>Code, quality, AI labelling and live health checks passed. Shaun accepted two failed preview cleanup runs as a known low; the next fix (PR #200) solves their cause.</td></tr>
@@ -78,5 +79,5 @@ code{background:#f3f4f6;padding:1px 5px;border-radius:5px;font-size:14px}
 <li>Only Code Risk gives a confidence number. It's the model's own judgement and isn't calibrated; the fixed gates decide the verdict.</li>
 <li>No agent merges or deploys. Only Shaun approves a merge.</li>
 </ul>
-<p class="foot">Published by Release Captain. Last updated 23 Oct 2026, 4:39 PM NZDT.</p>
+<p class="foot">Published by Release Captain. Last updated 23 Oct 2026, 5:08 PM NZDT.</p>
 </body></html>
