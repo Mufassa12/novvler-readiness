@@ -27,28 +27,31 @@ code{background:#f3f4f6;padding:1px 5px;border-radius:5px;font-size:14px}
 <section class="card go">
 <p class="verdict">🟢 GO</p>
 <dl class="props">
-<dt>Release</dt><dd><code>main</code> at merge commit <code>e5eef44</code>, the merge of PR #199</dd>
-<dt>What changed</dt><dd>Tightens which sites the backend accepts requests from</dd>
+<dt>Release</dt><dd>PR #210, E2E: give the cover draw test 6 minutes</dd>
+<dt>What changed</dt><dd>Gives the end-to-end cover draw test more time to finish. Test-only; no app code changed.</dd>
 <dt>Blockers</dt><dd>None</dd>
-<dt>Merged</dt><dd>1:51 PM NZDT, 23 Oct 2026</dd>
-<dt>Deployed</dt><dd>2:03 PM NZDT, 23 Oct 2026</dd>
-<dt>Run type</dt><dd>Post-merge</dd>
-<dt>Shaun's go/no-go</dt><dd>Go (Shaun approved the merge after the pre-merge GO)</dd>
+<dt>Verdict posted</dt><dd>8:10 AM NZDT, 24 Oct 2026</dd>
+<dt>Merged</dt><dd>8:14 AM NZDT, 24 Oct 2026</dd>
+<dt>Run type</dt><dd>Pre-merge (the check on main after the merge is running)</dd>
+<dt>Shaun's go/no-go</dt><dd>Go (8:14 AM NZDT)</dd>
 </dl>
 </section>
 
 <h2>Specialist verdicts</h2>
 <table>
 <tr><th>Check</th><th>Status</th><th>Evidence</th></tr>
-<tr><td>Code Risk</td><td><span class="pill p-go">GO · 0.86</span></td><td>The merged change is identical to the reviewed commit, and every deploy step passed, including the smoke test. One minor cleanup note: each deploy also redeploys the website and frontend.</td></tr>
-<tr><td>Quality</td><td><span class="pill p-go">PASS</span></td><td>All backend tests passed, including the new ones for this change, and coverage went up slightly. Frontend and Website were skipped because this change was backend-only.</td></tr>
-<tr><td>AI Trust</td><td><span class="pill p-go">PASS</span></td><td>No labelling or provenance code changed. The live vision check wasn't needed for a backend-only change.</td></tr>
-<tr><td>Metrics</td><td><span class="pill p-go">PASS</span></td><td>First 5 minutes on the new release: no errors, and latency in line with or better than the previous release.</td></tr>
+<tr><td>Code Risk</td><td><span class="pill p-go">GO · 0.88</span></td><td>Test-only change; the AI badge checks are unchanged and nothing new is skipped. Two low findings: a cover draw that takes the full image wait could still reach the new limit, and a merge redeploys only the frontend. The new limit first runs on main after the merge.</td></tr>
+<tr><td>Quality</td><td><span class="pill p-go">PASS</span></td><td>Frontend tests all passed and coverage held. The end-to-end smoke test passed with no flaky retries. Backend and Website were skipped because this change touches only a test file. The preview end-to-end status passed.</td></tr>
+<tr><td>AI Trust</td><td><span class="pill p-go">PASS</span></td><td>No labelling or provenance code changed. The Grok vision check saw the AI-generated badge on the cover, and it matches the stored label.</td></tr>
+<tr><td>Metrics</td><td><span class="pill p-go">Baseline</span></td><td>Production healthy before the merge: no server errors, and a few rate-limited requests that Metrics is watching. The 5-minute comparison follows on main after the deploy.</td></tr>
 </table>
 
 <h2>Run history</h2>
 <table>
 <tr><th>When (NZDT)</th><th>Release</th><th>Verdict</th><th>Summary</th></tr>
+<tr><td>24 Oct, 8:10 AM</td><td>PR #210 (E2E: give the cover draw test 6 minutes)</td><td><span class="pill p-go">GO</span></td><td>Test-only change. Code Risk GO with two low findings: a slow cover draw could still reach the new limit, and a merge redeploys only the frontend. Quality passed. AI Trust passed, including the image badge check. Metrics baseline healthy, with no server errors and a few rate-limited requests. Shaun said GO at 8:14 AM and it was merged; the check on main is running.</td></tr>
+<tr><td>24 Oct, 8:02 AM</td><td>Main after #207 merge</td><td><span class="pill p-go">GO</span></td><td>The first run was held last night because GitHub Actions billing blocked CI. After the CI re-run: Code Risk GO, Quality passed, AI Trust passed, and Metrics passed on the new release over 5 minutes (no errors, latency in line with the previous release). The deploy succeeded.</td></tr>
+<tr><td>23 Oct, 11:27 PM</td><td>PR #207 (Preview E2E commit status)</td><td><span class="pill p-go">GO</span></td><td>Code Risk GO with one low finding: the deploy redeploys all three services. Quality and AI Trust passed, and the Metrics baseline was healthy. Shaun said GO at 11:33 PM and it was merged.</td></tr>
 <tr><td>23 Oct, 10:49 PM</td><td>PR #206 (demo break test)</td><td><span class="pill p-hold">HOLD</span></td><td>HOLD, as intended. A test change that hid the AI label on covers was caught by code review, the AI labelling check and the preview test. It was not merged.</td></tr>
 <tr><td>23 Oct, 10:06 PM</td><td>Main after #204 merge</td><td><span class="pill p-go">GO</span></td><td>Main after the deploy check fix merged: GO. Code review, tests and build, AI labelling and live health all passed, and the new deploy check worked on its first real run.</td></tr>
 <tr><td>23 Oct, 9:14 PM</td><td>PR #204, deploy check fix</td><td><span class="pill p-go">GO</span></td><td>Tightened fix. Code review confirmed both earlier gaps are closed, tests and AI labelling checks passed, and production was healthy. Shaun said yes and it merged at 9:44 PM; the check on main is running.</td></tr>
@@ -65,7 +68,7 @@ code{background:#f3f4f6;padding:1px 5px;border-radius:5px;font-size:14px}
 <tr><td>23 Oct, 3:53 PM</td><td>PR #200 at <code>308c8e9</code></td><td><span class="pill p-go">GO</span></td><td>Fixes preview cleanup when a pull request closes. Code, quality and AI labelling checks passed, and previews still cannot make images. Merged on Shaun's go; a post-merge check is open.</td></tr>
 <tr><td>23 Oct, 3:36 PM</td><td>PR #197 at <code>8476df4</code></td><td><span class="pill p-go">GO</span></td><td>The preview unpacking issue is fixed, and previews now use their own limited sign-in. Shaun accepted two open items: an old wider sign-in that is removed after the first clean preview, and a preview check that can only pass after merge. Code, quality and AI labelling checks passed. Merged on Shaun's go.</td></tr>
 <tr><td>23 Oct, 2:58 PM</td><td>PR #197 at <code>55c642a</code></td><td><span class="pill p-hold">HOLD</span></td><td>Test logins no longer reach the change&#39;s own code, but Code Risk found a new high issue in how preview builds are unpacked, and one medium remains. The preview gate can only pass after merge. AI Trust passed. Sent back to engineering.</td></tr>
-<tr><td>23 Oct, 2:17 PM</td><td><code>main</code> at <code>e5eef44</code> (PR #199)</td><td><span class="pill p-go">GO</span></td><td>Latest run, shown above. Merge matches what was reviewed; tests and AI labelling passed; no errors after deploy.</td></tr>
+<tr><td>23 Oct, 2:17 PM</td><td><code>main</code> at <code>e5eef44</code> (PR #199)</td><td><span class="pill p-go">GO</span></td><td>Merge matches what was reviewed; tests and AI labelling passed; no errors after deploy.</td></tr>
 <tr><td>23 Oct, 1:51 PM</td><td>PR #199 at <code>0d894a8</code></td><td><span class="pill p-go">GO</span></td><td>Tightens which sites the backend accepts. Code Risk GO 0.86; Quality and AI Trust passed. Shaun approved the merge.</td></tr>
 <tr><td>23 Oct, 1:51 PM</td><td>PR #197 at <code>b13e381</code></td><td><span class="pill p-hold">HOLD</span></td><td>Preview setup improved, but two medium security issues remain and the preview gate can&#39;t run until a script is on main. AI Trust passed. Sent back to engineering.</td></tr>
 <tr><td>23 Oct, 1:46 PM</td><td>PR #198 at <code>57faf75</code></td><td><span class="pill p-hold">HOLD</span></td><td>New badge tests work, but the new AI sign-off check doesn&#39;t enforce anything yet (Code Risk and AI Trust held; Quality passed). Sent back to engineering.</td></tr>
@@ -88,5 +91,5 @@ code{background:#f3f4f6;padding:1px 5px;border-radius:5px;font-size:14px}
 <li>Only Code Risk gives a confidence number. It's the model's own judgement and isn't calibrated; the fixed gates decide the verdict.</li>
 <li>No agent merges or deploys. Only Shaun approves a merge.</li>
 </ul>
-<p class="foot">Published by Release Captain. Last updated 23 Oct 2026, 10:49 PM NZDT.</p>
+<p class="foot">Published by Release Captain. Last updated 24 Oct 2026, 8:10 AM NZDT.</p>
 </body></html>
