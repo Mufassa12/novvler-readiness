@@ -6,6 +6,7 @@ h1{font-size:28px;margin:0 0 6px}h2{font-size:20px;margin:28px 0 10px}
 .intro{color:#4b5563;margin:0 0 20px}
 .card{background:#fff;border:1px solid #e3e6ea;border-radius:14px;padding:18px 22px;margin:0 0 16px;box-shadow:0 1px 3px rgba(16,24,40,.06)}
 .go{border-left:6px solid #43a047}
+.hold{border-left:6px solid #e53935}
 .verdict{font-size:26px;font-weight:700;margin:0}
 .props{display:grid;grid-template-columns:160px 1fr;gap:6px 16px;margin:12px 0 0;font-size:15px}
 .props dt{color:#6b7280}.props dd{margin:0}
@@ -24,31 +25,31 @@ code{background:#f3f4f6;padding:1px 5px;border-radius:5px;font-size:14px}
 <h1>Novvler Release Readiness</h1>
 <p class="intro">One GO or HOLD per release, built from four specialist checks. Updated in place on every run.</p>
 
-<section class="card go">
-<p class="verdict">🟢 GO</p>
+<section class="card hold">
+<p class="verdict">🔴 HOLD</p>
 <dl class="props">
-<dt>Release</dt><dd>PR #210, E2E: give the cover draw test 6 minutes</dd>
-<dt>What changed</dt><dd>Gives the end-to-end cover draw test more time to finish. Test-only; no app code changed.</dd>
-<dt>Blockers</dt><dd>None</dd>
-<dt>Verdict posted</dt><dd>8:10 AM NZDT, 24 Oct 2026</dd>
-<dt>Merged</dt><dd>8:14 AM NZDT, 24 Oct 2026</dd>
-<dt>Run type</dt><dd>Pre-merge (the check on main after the merge is running)</dd>
-<dt>Shaun's go/no-go</dt><dd>Go (8:14 AM NZDT)</dd>
+<dt>Release</dt><dd>Main after PR #210 merge (E2E: give the cover draw test 6 minutes)</dd>
+<dt>What changed</dt><dd>The test-only change from PR #210, now deployed on main.</dd>
+<dt>Blockers</dt><dd>One medium Code Risk finding: the backend and website deploy jobs ignore the path filters, so every merge to main redeploys all services.</dd>
+<dt>Verdict posted</dt><dd>8:47 AM NZDT, 24 Oct 2026</dd>
+<dt>Run type</dt><dd>Post-merge check on main</dd>
+<dt>Shaun's decision</dt><dd>Fix the deploy workflow rather than waive the finding. The fix is PR #211, and its readiness run is open.</dd>
 </dl>
 </section>
 
 <h2>Specialist verdicts</h2>
 <table>
 <tr><th>Check</th><th>Status</th><th>Evidence</th></tr>
-<tr><td>Code Risk</td><td><span class="pill p-go">GO · 0.88</span></td><td>Test-only change; the AI badge checks are unchanged and nothing new is skipped. Two low findings: a cover draw that takes the full image wait could still reach the new limit, and a merge redeploys only the frontend. The new limit first runs on main after the merge.</td></tr>
-<tr><td>Quality</td><td><span class="pill p-go">PASS</span></td><td>Frontend tests all passed and coverage held. The end-to-end smoke test passed with no flaky retries. Backend and Website were skipped because this change touches only a test file. The preview end-to-end status passed.</td></tr>
-<tr><td>AI Trust</td><td><span class="pill p-go">PASS</span></td><td>No labelling or provenance code changed. The Grok vision check saw the AI-generated badge on the cover, and it matches the stored label.</td></tr>
-<tr><td>Metrics</td><td><span class="pill p-go">Baseline</span></td><td>Production healthy before the merge: no server errors, and a few rate-limited requests that Metrics is watching. The 5-minute comparison follows on main after the deploy.</td></tr>
+<tr><td>Code Risk</td><td><span class="pill p-hold">HOLD · 0.93</span></td><td>One medium finding: the backend and website deploy jobs don't follow the path filters the frontend job already uses, so every merge to main redeploys all three services. Shaun chose to fix this in PR #211 rather than waive it.</td></tr>
+<tr><td>Quality</td><td><span class="pill p-go">PASS</span></td><td>Required checks ran and passed on main, coverage held, and there were no flaky or skipped tests outside the expected path filters.</td></tr>
+<tr><td>AI Trust</td><td><span class="pill p-go">PASS</span></td><td>Main matches what was reviewed on PR #210. No labelling or provenance code changed, and the AI-generated badge checks still pass.</td></tr>
+<tr><td>Metrics</td><td><span class="pill p-go">PASS</span></td><td>The new backend release was briefly slow right after cutover while it warmed up. On recheck it matched the previous release, with no errors.</td></tr>
 </table>
 
 <h2>Run history</h2>
 <table>
 <tr><th>When (NZDT)</th><th>Release</th><th>Verdict</th><th>Summary</th></tr>
+<tr><td>24 Oct, 8:47 AM</td><td>Main after #210 merge</td><td><span class="pill p-hold">HOLD</span></td><td>Code Risk HOLD on one medium finding: the backend and website deploy jobs ignore the path filters, so every merge redeploys all services. Quality passed and AI Trust passed. Metrics passed after a recheck: the new backend release was briefly slow right after cutover while it warmed up, then matched the previous release with no errors. Shaun chose to fix the deploy workflow rather than waive the finding; the fix is PR #211 and its readiness run is open.</td></tr>
 <tr><td>24 Oct, 8:10 AM</td><td>PR #210 (E2E: give the cover draw test 6 minutes)</td><td><span class="pill p-go">GO</span></td><td>Test-only change. Code Risk GO with two low findings: a slow cover draw could still reach the new limit, and a merge redeploys only the frontend. Quality passed. AI Trust passed, including the image badge check. Metrics baseline healthy, with no server errors and a few rate-limited requests. Shaun said GO at 8:14 AM and it was merged; the check on main is running.</td></tr>
 <tr><td>24 Oct, 8:02 AM</td><td>Main after #207 merge</td><td><span class="pill p-go">GO</span></td><td>The first run was held last night because GitHub Actions billing blocked CI. After the CI re-run: Code Risk GO, Quality passed, AI Trust passed, and Metrics passed on the new release over 5 minutes (no errors, latency in line with the previous release). The deploy succeeded.</td></tr>
 <tr><td>23 Oct, 11:27 PM</td><td>PR #207 (Preview E2E commit status)</td><td><span class="pill p-go">GO</span></td><td>Code Risk GO with one low finding: the deploy redeploys all three services. Quality and AI Trust passed, and the Metrics baseline was healthy. Shaun said GO at 11:33 PM and it was merged.</td></tr>
@@ -91,5 +92,5 @@ code{background:#f3f4f6;padding:1px 5px;border-radius:5px;font-size:14px}
 <li>Only Code Risk gives a confidence number. It's the model's own judgement and isn't calibrated; the fixed gates decide the verdict.</li>
 <li>No agent merges or deploys. Only Shaun approves a merge.</li>
 </ul>
-<p class="foot">Published by Release Captain. Last updated 24 Oct 2026, 8:10 AM NZDT.</p>
+<p class="foot">Published by Release Captain. Last updated 24 Oct 2026, 8:47 AM NZDT.</p>
 </body></html>
