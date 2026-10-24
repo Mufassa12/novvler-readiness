@@ -49,7 +49,7 @@ code{background:#f3f4f6;padding:1px 5px;border-radius:5px;font-size:14px}
 <dt>Blockers</dt><dd>Code Risk found a high issue: the AI badge is removed, so an AI image would show with no label. AI Trust held for the same reason. The required automated checks passed, because none of them looks at this part of the page. The preview test did catch the missing badge.</dd>
 <dt>Verdict posted</dt><dd>1:21 PM NZDT, 24 Oct 2026</dd>
 </dl>
-<p class="decision"><strong>Shaun's decision:</strong> ⏳ Not yet. This is a demo break, so it will not be merged. Closing it is Shaun's call.</p>
+<p class="decision"><strong>Shaun's decision:</strong> 🔴 No go. Shaun asked for the PR to be closed at 1:28 PM NZDT, and it was closed without merging.</p>
 </section>
 </div>
 
@@ -65,7 +65,7 @@ code{background:#f3f4f6;padding:1px 5px;border-radius:5px;font-size:14px}
 <h2>Run history</h2>
 <table>
 <tr><th>When (NZDT)</th><th>Release</th><th>Verdict</th><th>Summary</th></tr>
-<tr><td>24 Oct, 1:21 PM</td><td>PR #212 (demo break test)</td><td><span class="pill p-hold">HOLD</span></td><td>HOLD, as intended. A change that removed the AI label from covers was caught by code review, the AI labelling check and the preview test. The required automated checks passed because none of them covers this part of the page, and that difference was raised with Shaun. It will not be merged; closing it is Shaun&#39;s call.</td></tr>
+<tr><td>24 Oct, 1:21 PM</td><td>PR #212 (demo break test)</td><td><span class="pill p-hold">HOLD</span></td><td>HOLD, as intended. A change that removed the AI label from covers was caught by code review, the AI labelling check and the preview test. The required automated checks passed because none of them covers this part of the page, and that difference was raised with Shaun. Shaun said no go and it was closed without merging.</td></tr>
 <tr><td>24 Oct, 10:12 AM</td><td>Main after #211 merge</td><td><span class="pill p-go">GO</span></td><td>Code Risk GO with no medium or high findings, so nothing was waived. Quality passed, AI Trust passed, and Metrics passed on the new release over 5 minutes, with no errors and response times about level with the previous release. The deploy succeeded and redeployed all three services once, as expected for a workflow change.</td></tr>
 <tr><td>24 Oct, 9:30 AM</td><td>PR #211 (Deploy: only redeploy backend and website when their files change)</td><td><span class="pill p-go">GO</span></td><td>Code Risk GO with one low finding: the frontend deploy still has no change filter of its own, a follow-up. Quality passed: required checks ran and passed, coverage held, and the E2E cover test passed well inside the time limit. AI Trust passed; the PR touches no AI or labelling code. Metrics baseline healthy, with no errors. Shaun gave his own merge go and it was merged.</td></tr>
 <tr><td>24 Oct, 8:47 AM</td><td>Main after #210 merge</td><td><span class="pill p-hold">HOLD</span></td><td>Code Risk HOLD on one medium finding: the backend and website deploy jobs ignore the path filters, so every merge redeploys all services. Quality passed and AI Trust passed. Metrics passed after a recheck: the new backend release was briefly slow right after cutover while it warmed up, then matched the previous release with no errors. Shaun chose to fix the deploy workflow rather than waive the finding; the fix is PR #211 and its readiness run is open.</td></tr>
@@ -111,5 +111,5 @@ code{background:#f3f4f6;padding:1px 5px;border-radius:5px;font-size:14px}
 <li>Only Code Risk gives a confidence number. It's the model's own judgement and isn't calibrated; the fixed gates decide the verdict.</li>
 <li>No agent merges or deploys. Only Shaun approves a merge.</li>
 </ul>
-<p class="foot">Published by Release Captain. Last updated 24 Oct 2026, 1:21 PM NZDT.</p>
+<p class="foot">Published by Release Captain. Last updated 24 Oct 2026, 1:29 PM NZDT.</p>
 </body></html>
