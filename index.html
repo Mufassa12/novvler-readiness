@@ -20,36 +20,53 @@ ul.rules{background:#fff;border:1px solid #e3e6ea;border-radius:12px;padding:14p
 ul.rules li{margin:4px 0}
 code{background:#f3f4f6;padding:1px 5px;border-radius:5px;font-size:14px}
 .foot{color:#6b7280;font-size:13px;margin:28px 0 0}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:16px}.pair .card{margin:0}.label{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:#6b7280;margin:0 0 4px}.decision{background:#f9fafb;border:1px solid #eef0f3;border-radius:10px;padding:10px 14px;margin:14px 0 0;font-size:15px}
+@media(max-width:760px){.pair{grid-template-columns:1fr}}
 @media(max-width:640px){.props{grid-template-columns:1fr}}
 </style></head><body>
 <h1>Novvler Release Readiness</h1>
-<p class="intro">One GO or HOLD per release, built from four specialist checks. Updated in place on every run.</p>
+<p class="intro">One GO or HOLD per release, built from four specialist checks. Main and the PR under review are shown side by side, with Shaun&#39;s go or no-go on the PR. Updated in place after every review.</p>
 
+<h2>Main and the PR under review, side by side</h2>
+<div class="pair">
 <section class="card go">
+<p class="label">Main (what is live)</p>
 <p class="verdict">🟢 GO</p>
 <dl class="props">
-<dt>Release</dt><dd>PR #211 (Deploy: only redeploy backend and website when their files change)</dd>
-<dt>What changed</dt><dd>The deploy workflow now redeploys the backend and website only when their own files change. A workflow change or a manual run still redeploys everything.</dd>
-<dt>Blockers</dt><dd>None. One low Code Risk finding: the frontend deploy still has no change filter of its own, so it redeploys on every merge. This is a follow-up.</dd>
-<dt>Verdict posted</dt><dd>9:30 AM NZDT, 24 Oct 2026</dd>
-<dt>Run type</dt><dd>Pre-merge check on the pull request</dd>
-<dt>Shaun's decision</dt><dd>Shaun gave his own merge go and PR #211 was merged. A post-merge check on main is now running.</dd>
+<dt>Release</dt><dd>Main after the #211 merge</dd>
+<dt>What changed</dt><dd>The deploy workflow fix from #211 is live. This merge changed a workflow file, so all three services redeployed once, as expected.</dd>
+<dt>Blockers</dt><dd>None, and nothing was waived. One low follow-up: the frontend deploy has no change filter of its own yet.</dd>
+<dt>Verdict posted</dt><dd>10:12 AM NZDT, 24 Oct 2026</dd>
 </dl>
+<p class="decision"><strong>Shaun's decision:</strong> No go needed. This is the post-merge check on main, and it confirms main is green.</p>
 </section>
+<section class="card go">
+<p class="label">PR under review</p>
+<p class="verdict">🟢 GO</p>
+<dl class="props">
+<dt>Release</dt><dd>PR #211 (Deploy: only redeploy backend and website when their files change). No newer PR is under review yet, so this shows the last one.</dd>
+<dt>What changed</dt><dd>The backend and website now redeploy only when their own files change. A workflow change or a manual run still redeploys everything.</dd>
+<dt>Blockers</dt><dd>None. One low finding: the frontend deploy has no change filter of its own yet.</dd>
+<dt>Verdict posted</dt><dd>9:30 AM NZDT, 24 Oct 2026</dd>
+</dl>
+<p class="decision"><strong>Shaun's decision:</strong> 🟢 Go. Shaun typed Go in the readiness room at 9:30 AM NZDT, and the PR was merged.</p>
+</section>
+</div>
 
 <h2>Specialist verdicts</h2>
 <table>
-<tr><th>Check</th><th>Status</th><th>Evidence</th></tr>
-<tr><td>Code Risk</td><td><span class="pill p-go">GO</span></td><td>The backend and website deploy jobs now follow their path filters, and a workflow change or manual run still redeploys everything. One low finding: the frontend deploy still has no change filter of its own, a follow-up.</td></tr>
-<tr><td>Quality</td><td><span class="pill p-go">PASS</span></td><td>Required checks ran and passed, coverage held, and the E2E cover test passed well inside the time limit.</td></tr>
-<tr><td>AI Trust</td><td><span class="pill p-go">PASS</span></td><td>The PR touches no AI or labelling code.</td></tr>
-<tr><td>Metrics</td><td><span class="pill p-go">Baseline healthy</span></td><td>Production baseline is healthy, with no errors. Nothing from the PR was live yet, so this is a baseline only.</td></tr>
+<tr><th>Check</th><th>Main (live)</th><th>PR under review (#211)</th></tr>
+<tr><td>Code Risk</td><td><span class="pill p-go">GO</span> No medium or high findings, nothing waived. One low: the frontend deploy has no change filter yet.</td><td><span class="pill p-go">GO</span> The backend and website deploy jobs now follow their path filters. Same low finding on the frontend deploy.</td></tr>
+<tr><td>Quality</td><td><span class="pill p-go">PASS</span> Required checks ran and passed on main, and coverage is back at its usual level.</td><td><span class="pill p-go">PASS</span> Required checks ran and passed, coverage held, and the E2E cover test passed well inside the time limit.</td></tr>
+<tr><td>AI Trust</td><td><span class="pill p-go">PASS</span> Main matches the reviewed PR exactly, and no AI or labelling code changed.</td><td><span class="pill p-go">PASS</span> The PR touches no AI or labelling code.</td></tr>
+<tr><td>Metrics</td><td><span class="pill p-go">PASS</span> The new backend release had no errors in its first 5 minutes, and response times were about level with the previous release.</td><td><span class="pill p-go">Baseline healthy</span> Nothing from the PR was live yet, so this is a production baseline only, with no errors.</td></tr>
 </table>
 
 <h2>Run history</h2>
 <table>
 <tr><th>When (NZDT)</th><th>Release</th><th>Verdict</th><th>Summary</th></tr>
-<tr><td>24 Oct, 9:30 AM</td><td>PR #211 (Deploy: only redeploy backend and website when their files change)</td><td><span class="pill p-go">GO</span></td><td>Code Risk GO with one low finding: the frontend deploy still has no change filter of its own, a follow-up. Quality passed: required checks ran and passed, coverage held, and the E2E cover test passed well inside the time limit. AI Trust passed; the PR touches no AI or labelling code. Metrics baseline healthy, with no errors. Shaun gave his own merge go and it was merged; the check on main is running.</td></tr>
+<tr><td>24 Oct, 10:12 AM</td><td>Main after #211 merge</td><td><span class="pill p-go">GO</span></td><td>Code Risk GO with no medium or high findings, so nothing was waived. Quality passed, AI Trust passed, and Metrics passed on the new release over 5 minutes, with no errors and response times about level with the previous release. The deploy succeeded and redeployed all three services once, as expected for a workflow change.</td></tr>
+<tr><td>24 Oct, 9:30 AM</td><td>PR #211 (Deploy: only redeploy backend and website when their files change)</td><td><span class="pill p-go">GO</span></td><td>Code Risk GO with one low finding: the frontend deploy still has no change filter of its own, a follow-up. Quality passed: required checks ran and passed, coverage held, and the E2E cover test passed well inside the time limit. AI Trust passed; the PR touches no AI or labelling code. Metrics baseline healthy, with no errors. Shaun gave his own merge go and it was merged.</td></tr>
 <tr><td>24 Oct, 8:47 AM</td><td>Main after #210 merge</td><td><span class="pill p-hold">HOLD</span></td><td>Code Risk HOLD on one medium finding: the backend and website deploy jobs ignore the path filters, so every merge redeploys all services. Quality passed and AI Trust passed. Metrics passed after a recheck: the new backend release was briefly slow right after cutover while it warmed up, then matched the previous release with no errors. Shaun chose to fix the deploy workflow rather than waive the finding; the fix is PR #211 and its readiness run is open.</td></tr>
 <tr><td>24 Oct, 8:10 AM</td><td>PR #210 (E2E: give the cover draw test 6 minutes)</td><td><span class="pill p-go">GO</span></td><td>Test-only change. Code Risk GO with two low findings: a slow cover draw could still reach the new limit, and a merge redeploys only the frontend. Quality passed. AI Trust passed, including the image badge check. Metrics baseline healthy, with no server errors and a few rate-limited requests. Shaun said GO at 8:14 AM and it was merged; the check on main is running.</td></tr>
 <tr><td>24 Oct, 8:02 AM</td><td>Main after #207 merge</td><td><span class="pill p-go">GO</span></td><td>The first run was held last night because GitHub Actions billing blocked CI. After the CI re-run: Code Risk GO, Quality passed, AI Trust passed, and Metrics passed on the new release over 5 minutes (no errors, latency in line with the previous release). The deploy succeeded.</td></tr>
@@ -93,5 +110,5 @@ code{background:#f3f4f6;padding:1px 5px;border-radius:5px;font-size:14px}
 <li>Only Code Risk gives a confidence number. It's the model's own judgement and isn't calibrated; the fixed gates decide the verdict.</li>
 <li>No agent merges or deploys. Only Shaun approves a merge.</li>
 </ul>
-<p class="foot">Published by Release Captain. Last updated 24 Oct 2026, 9:30 AM NZDT.</p>
+<p class="foot">Published by Release Captain. Last updated 24 Oct 2026, 1:05 PM NZDT.</p>
 </body></html>
