@@ -45,10 +45,10 @@ code{background:#f3f4f6;padding:1px 5px;border-radius:5px;font-size:14px}
 <p class="label">PR under review</p>
 <p class="verdict">🔴 HOLD</p>
 <dl class="props">
-<dt>Release</dt><dd><a href="https://github.com/Mufassa12/surferwriter/pull/217">PR #217</a> (DEMO, DO NOT MERGE)</dd>
-<dt>What changed</dt><dd>A deliberate AI-label break: a global style rule hides the AI-generated label everywhere while the record still says AI.</dd>
+<dt>Release</dt><dd><a href="https://github.com/Mufassa12/surferwriter/pull/218">PR #218</a> (DEMO, DO NOT MERGE)</dd>
+<dt>What changed</dt><dd>A deliberate AI-label break: a global rule in the app&#39;s main stylesheet makes every AI-generated badge invisible. The badge stays in the page but can&#39;t be seen.</dd>
 <dt>Blockers</dt><dd>Every CI check passed. Code Risk and AI Trust held it. Escalated to Shaun with both sides.</dd>
-<dt>Verdict posted</dt><dd>11:54 PM NZDT, 25 Oct 2026</dd>
+<dt>Verdict posted</dt><dd>5:57 PM NZDT, 26 Oct 2026</dd>
 </dl>
 <p class="decision"><strong>Shaun's decision:</strong> Not decided yet.</p>
 </section>
@@ -56,16 +56,17 @@ code{background:#f3f4f6;padding:1px 5px;border-radius:5px;font-size:14px}
 
 <h2>Specialist verdicts</h2>
 <table>
-<tr><th>Check</th><th>Main (live)</th><th>PR under review (#217)</th></tr>
-<tr><td>Code Risk</td><td><span class="pill p-go">GO</span> No medium or high findings, nothing waived. One low: the frontend deploy has no change filter yet.</td><td><span class="pill p-hold">HOLD</span> High risk: a global style rule hides the AI-generated label everywhere.</td></tr>
+<tr><th>Check</th><th>Main (live)</th><th>PR under review (#218)</th></tr>
+<tr><td>Code Risk</td><td><span class="pill p-go">GO</span> No medium or high findings, nothing waived. One low: the frontend deploy has no change filter yet.</td><td><span class="pill p-hold">HOLD</span> High risk: a global rule in the main stylesheet makes every AI-generated badge invisible.</td></tr>
 <tr><td>Quality</td><td><span class="pill p-go">PASS</span> Required checks ran and passed on main, and coverage is back at its usual level.</td><td><span class="pill p-go">PASS</span> All checks are green, but none of them can see the hidden label.</td></tr>
-<tr><td>AI Trust</td><td><span class="pill p-go">PASS</span> Main matches the reviewed PR exactly, and no AI or labelling code changed.</td><td><span class="pill p-hold">HOLD</span> Live Grok vision check: the label is not visible while the record says AI-generated.</td></tr>
+<tr><td>AI Trust</td><td><span class="pill p-go">PASS</span> Main matches the reviewed PR exactly, and no AI or labelling code changed.</td><td><span class="pill p-hold">HOLD</span> Live Grok vision check: the label is not visible while the record says AI-generated. No new image was drawn.</td></tr>
 <tr><td>Metrics</td><td><span class="pill p-go">PASS</span> The new backend release had no errors in its first few minutes, and response times were about level with the previous release.</td><td><span class="pill p-pend">Baseline only</span> No vote. Production is healthy.</td></tr>
 </table>
 
 <h2>Run history</h2>
 <table>
 <tr><th>When (NZDT)</th><th>Release</th><th>Verdict</th><th>Summary</th></tr>
+<tr><td>26 Oct, 5:57 PM</td><td>PR #218 (DEMO, DO NOT MERGE)</td><td><span class="pill p-hold">HOLD</span></td><td>HOLD. A global rule in the app&#39;s main stylesheet made every AI-generated badge invisible while it stayed in the page. CI was green, but the AI checks held it: Code Risk (high risk) and AI Trust&#39;s live Grok vision check. Escalated to Shaun with both sides.</td></tr>
 <tr><td>25 Oct, 11:54 PM</td><td>PR #217 (DEMO, DO NOT MERGE)</td><td><span class="pill p-hold">HOLD</span></td><td>HOLD. A global style rule hid the AI-generated label everywhere while the record still says AI. Every CI check passed, but Code Risk (high risk) and the live Grok vision check held it. Escalated to Shaun with both sides.</td></tr>
 <tr><td>25 Oct, 11:30 PM</td><td>PR #216 (DEMO, DO NOT MERGE)</td><td><span class="pill p-hold">HOLD</span></td><td>HOLD, a deliberate demo break: the AI-generated badge was set invisible while the label stayed in the data. Code Risk (high), Quality and AI Trust all held. The required frontend check and AI Trust sign-off failed on the badge visibility test, and the live Grok vision check found no visible badge. The AI checks and CI agree. Closed without merging, replaced by #217; HOLD on record.</td></tr>
 <tr><td>25 Oct, 8:04 PM</td><td>PR #214 (draft: image-label-enhancement)</td><td><span class="pill p-hold">HOLD</span></td><td>HOLD. A styling change made the AI badge in the book view&#39;s cover row invisible while leaving it in the page. All CI was green, including the optional preview test, which reads the unaffected cover pop-up badge. Caught by the code review and the live Grok vision check. Shaun to decide.</td></tr>
@@ -116,5 +117,5 @@ code{background:#f3f4f6;padding:1px 5px;border-radius:5px;font-size:14px}
 <li>Only Code Risk gives a confidence number. It's the model's own judgement and isn't calibrated; the fixed gates decide the verdict.</li>
 <li>No agent merges or deploys. Only Shaun approves a merge.</li>
 </ul>
-<p class="foot">Published by Release Captain. Last updated 25 Oct 2026, 11:54 PM NZDT.</p>
+<p class="foot">Published by Release Captain. Last updated 26 Oct 2026, 5:57 PM NZDT.</p>
 </body></html>
